@@ -1,0 +1,120 @@
+[
+ {
+  "id": "icon_osm_letters",
+  "f": "play/icon_en.png",
+  "box": [
+   80,
+   375,
+   330,
+   460
+  ],
+  "k": 5,
+  "scale": 1.0
+ },
+ {
+  "id": "icon_2627_gold",
+  "f": "play/icon_en.png",
+  "box": [
+   365,
+   365,
+   470,
+   480
+  ],
+  "k": 4,
+  "scale": 1.0
+ },
+ {
+  "id": "icon_ball_navy",
+  "f": "play/icon_en.png",
+  "box": [
+   150,
+   150,
+   200,
+   200
+  ],
+  "k": 4,
+  "scale": 1.0
+ },
+ {
+  "id": "ring_edge_vs",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   552,
+   170,
+   560,
+   185
+  ],
+  "k": 3
+ },
+ {
+  "id": "ring_edge_minute",
+  "f": "ios/OSM-300_Match_Exp_2796x1290px_en-GB.png",
+  "box": [
+   668,
+   185,
+   674,
+   200
+  ],
+  "k": 3
+ },
+ {
+  "id": "web_accept",
+  "f": "web/privacy_gate_1440.png",
+  "box": [
+   630,
+   392,
+   770,
+   420
+  ],
+  "k": 3,
+  "scale": 1.0
+ },
+ {
+  "id": "web_panel",
+  "f": "web/privacy_gate_1440.png",
+  "box": [
+   1000,
+   240,
+   1300,
+   300
+  ],
+  "k": 3,
+  "scale": 1.0
+ },
+ {
+  "id": "web_link",
+  "f": "web/privacy_gate_1440.png",
+  "box": [
+   520,
+   326,
+   605,
+   344
+  ],
+  "k": 3,
+  "scale": 1.0
+ },
+ {
+  "id": "web_logo_gold",
+  "f": "web/privacy_gate_1440.png",
+  "box": [
+   640,
+   85,
+   740,
+   125
+  ],
+  "k": 5,
+  "scale": 1.0
+ },
+ {
+  "id": "web_bg_top",
+  "f": "web/privacy_gate_1440.png",
+  "box": [
+   0,
+   0,
+   1440,
+   60
+  ],
+  "k": 3,
+  "scale": 1.0
+ }
+]

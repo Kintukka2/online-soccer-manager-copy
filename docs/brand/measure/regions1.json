@@ -1,0 +1,505 @@
+[
+ {
+  "id": "topbar",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   500,
+   8,
+   1000,
+   55
+  ]
+ },
+ {
+  "id": "topbar_hairline",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   400,
+   65,
+   1100,
+   70
+  ],
+  "k": 3
+ },
+ {
+  "id": "pill_clubfunds",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   245,
+   20,
+   318,
+   44
+  ]
+ },
+ {
+  "id": "pill_bosscoin",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   392,
+   20,
+   458,
+   44
+  ]
+ },
+ {
+  "id": "tab_menu_light",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   1320,
+   5,
+   1395,
+   65
+  ]
+ },
+ {
+  "id": "empty_slot",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   800,
+   135,
+   860,
+   215
+  ]
+ },
+ {
+  "id": "plus_circle",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   880,
+   155,
+   925,
+   200
+  ]
+ },
+ {
+  "id": "card_rating_text",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   452,
+   160,
+   500,
+   198
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_body",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   700,
+   135,
+   760,
+   160
+  ]
+ },
+ {
+  "id": "pitch",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   300,
+   610,
+   520,
+   640
+  ]
+ },
+ {
+  "id": "side_icon_btn",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   40,
+   250,
+   95,
+   290
+  ]
+ },
+ {
+  "id": "side_label_pill",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   32,
+   298,
+   102,
+   318
+  ]
+ },
+ {
+  "id": "formation_pill",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   112,
+   152,
+   222,
+   190
+  ]
+ },
+ {
+  "id": "bench_panel",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   1185,
+   100,
+   1240,
+   120
+  ]
+ },
+ {
+  "id": "table_head_blue",
+  "f": "ios/OSM-300_Ultimate_team_2796x1290px_en-GB.png",
+  "box": [
+   100,
+   302,
+   400,
+   322
+  ]
+ },
+ {
+  "id": "table_row_white",
+  "f": "ios/OSM-300_Ultimate_team_2796x1290px_en-GB.png",
+  "box": [
+   110,
+   410,
+   220,
+   445
+  ]
+ },
+ {
+  "id": "table_row_star",
+  "f": "ios/OSM-300_Ultimate_team_2796x1290px_en-GB.png",
+  "box": [
+   110,
+   332,
+   195,
+   362
+  ]
+ },
+ {
+  "id": "fit_bar",
+  "f": "ios/OSM-300_Ultimate_team_2796x1290px_en-GB.png",
+  "box": [
+   450,
+   342,
+   480,
+   350
+  ],
+  "k": 2
+ },
+ {
+  "id": "team_circle",
+  "f": "ios/OSM-300_Ultimate_team_2796x1290px_en-GB.png",
+  "box": [
+   525,
+   205,
+   595,
+   275
+  ]
+ },
+ {
+  "id": "line_circle",
+  "f": "ios/OSM-300_Ultimate_team_2796x1290px_en-GB.png",
+  "box": [
+   350,
+   205,
+   380,
+   240
+  ]
+ },
+ {
+  "id": "info_strip",
+  "f": "ios/OSM-300_Ultimate_team_2796x1290px_en-GB.png",
+  "box": [
+   120,
+   148,
+   340,
+   172
+  ]
+ },
+ {
+  "id": "panel_sky",
+  "f": "ios/OSM-300_Ultimate_team_2796x1290px_en-GB.png",
+  "box": [
+   20,
+   80,
+   560,
+   140
+  ]
+ },
+ {
+  "id": "page_royal",
+  "f": "ios/OSM-300_Upgrade_2796x1290px_en-GB.png",
+  "box": [
+   1370,
+   150,
+   1398,
+   250
+  ]
+ },
+ {
+  "id": "coach_card",
+  "f": "ios/OSM-300_Upgrade_2796x1290px_en-GB.png",
+  "box": [
+   320,
+   450,
+   550,
+   500
+  ]
+ },
+ {
+  "id": "coach_card_univ",
+  "f": "ios/OSM-300_Upgrade_2796x1290px_en-GB.png",
+  "box": [
+   45,
+   450,
+   280,
+   500
+  ]
+ },
+ {
+  "id": "progress_fill",
+  "f": "ios/OSM-300_Upgrade_2796x1290px_en-GB.png",
+  "box": [
+   350,
+   410,
+   370,
+   422
+  ],
+  "k": 2
+ },
+ {
+  "id": "progress_track",
+  "f": "ios/OSM-300_Upgrade_2796x1290px_en-GB.png",
+  "box": [
+   470,
+   407,
+   515,
+   425
+  ],
+  "k": 2
+ },
+ {
+  "id": "claim_btn",
+  "f": "ios/OSM-300_Upgrade_2796x1290px_en-GB.png",
+  "box": [
+   340,
+   515,
+   535,
+   560
+  ]
+ },
+ {
+  "id": "claim_btn_text",
+  "f": "ios/OSM-300_Upgrade_2796x1290px_en-GB.png",
+  "box": [
+   350,
+   527,
+   520,
+   550
+  ],
+  "k": 3
+ },
+ {
+  "id": "shield_frame",
+  "f": "ios/OSM-300_Upgrade_2796x1290px_en-GB.png",
+  "box": [
+   318,
+   300,
+   330,
+   380
+  ]
+ },
+ {
+  "id": "vs_panel_head",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   860,
+   110,
+   990,
+   240
+  ]
+ },
+ {
+  "id": "vs_gold",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   668,
+   148,
+   755,
+   205
+  ],
+  "k": 4
+ },
+ {
+  "id": "cyan_ring",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   775,
+   130,
+   868,
+   222
+  ]
+ },
+ {
+  "id": "next_match_tab",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   645,
+   80,
+   775,
+   105
+  ]
+ },
+ {
+  "id": "strip_dark",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   300,
+   252,
+   600,
+   288
+  ]
+ },
+ {
+  "id": "chip_W",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   96,
+   258,
+   120,
+   282
+  ]
+ },
+ {
+  "id": "chip_D",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   157,
+   258,
+   181,
+   282
+  ]
+ },
+ {
+  "id": "tactic_card",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   100,
+   410,
+   300,
+   450
+  ]
+ },
+ {
+  "id": "label_cyan",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   334,
+   337,
+   444,
+   358
+  ],
+  "k": 3
+ },
+ {
+  "id": "help_q",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   460,
+   335,
+   486,
+   361
+  ]
+ },
+ {
+  "id": "page_royal2",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   700,
+   300,
+   715,
+   320
+  ]
+ },
+ {
+  "id": "red_arrow",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   200,
+   493,
+   270,
+   500
+  ],
+  "k": 3
+ },
+ {
+  "id": "scoreboard",
+  "f": "ios/OSM-300_Match_Exp_2796x1290px_en-GB.png",
+  "box": [
+   520,
+   20,
+   620,
+   110
+  ]
+ },
+ {
+  "id": "minute_bubble",
+  "f": "ios/OSM-300_Match_Exp_2796x1290px_en-GB.png",
+  "box": [
+   668,
+   158,
+   736,
+   226
+  ]
+ },
+ {
+  "id": "event_pill",
+  "f": "ios/OSM-300_Match_Exp_2796x1290px_en-GB.png",
+  "box": [
+   410,
+   365,
+   460,
+   430
+  ]
+ },
+ {
+  "id": "goal_text",
+  "f": "ios/OSM-300_Match_Exp_2796x1290px_en-GB.png",
+  "box": [
+   400,
+   160,
+   560,
+   225
+  ],
+  "k": 5
+ },
+ {
+  "id": "missed_x",
+  "f": "ios/OSM-300_Match_Exp_2796x1290px_en-GB.png",
+  "box": [
+   590,
+   385,
+   620,
+   412
+  ],
+  "k": 3
+ },
+ {
+  "id": "division_shield",
+  "f": "ios/OSM-300_Rise_2796x1290px_en-GB.png",
+  "box": [
+   1085,
+   245,
+   1255,
+   420
+  ],
+  "k": 5
+ },
+ {
+  "id": "division_bar",
+  "f": "ios/OSM-300_Rise_2796x1290px_en-GB.png",
+  "box": [
+   1060,
+   552,
+   1270,
+   568
+  ],
+  "k": 2
+ }
+]

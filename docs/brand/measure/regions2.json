@@ -1,0 +1,323 @@
+[
+ {
+  "id": "card_olise_purple",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   10,
+   25,
+   30,
+   55
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_uzun_green",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   165,
+   25,
+   185,
+   55
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_courtois_violet",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   320,
+   25,
+   340,
+   55
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_haaland_navygold",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   477,
+   40,
+   497,
+   70
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_schlotterbeck_navy",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   635,
+   40,
+   655,
+   70
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_bellingham_navygold",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   792,
+   40,
+   812,
+   70
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_dias_green",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   948,
+   40,
+   968,
+   70
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_schick_orange",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   1103,
+   40,
+   1123,
+   70
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_cherki_blue",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   1262,
+   40,
+   1282,
+   70
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_valverde_blackgold",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   80,
+   250,
+   100,
+   280
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_foden_blackgold",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   237,
+   250,
+   257,
+   280
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_mbappe_navygold",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   397,
+   250,
+   417,
+   280
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_donnarumma_violet",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   857,
+   250,
+   877,
+   280
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_cucurella_crimson",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   1015,
+   250,
+   1035,
+   280
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_stiller_blue",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   1175,
+   250,
+   1195,
+   280
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_doku_teal",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   10,
+   470,
+   30,
+   500
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_oreilly_crimson",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   165,
+   470,
+   185,
+   500
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_romulo_gold",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   317,
+   470,
+   337,
+   500
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_semenyo_green",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   473,
+   470,
+   493,
+   500
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_kane_blue",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   625,
+   470,
+   645,
+   500
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_silva_green",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   780,
+   470,
+   800,
+   500
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_fullkrug_teal",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   935,
+   470,
+   955,
+   500
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_vini_blue",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   1087,
+   470,
+   1107,
+   500
+  ],
+  "k": 3
+ },
+ {
+  "id": "card_tchouameni_goldwhite",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   1245,
+   470,
+   1265,
+   500
+  ],
+  "k": 3
+ },
+ {
+  "id": "collect_bg",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   600,
+   60,
+   780,
+   200
+  ],
+  "k": 3
+ },
+ {
+  "id": "collect_70k_gold",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   565,
+   300,
+   820,
+   355
+  ],
+  "k": 4
+ },
+ {
+  "id": "collect_text_white",
+  "f": "ios/OSM-324_Cards_2796x1290px_en-GB.png",
+  "box": [
+   570,
+   230,
+   820,
+   290
+  ],
+  "k": 3
+ },
+ {
+  "id": "icon_osm_letters",
+  "f": "play/icon_en.png",
+  "box": [
+   150,
+   1090,
+   600,
+   1310
+  ],
+  "k": 5,
+  "scale": 1.0
+ },
+ {
+  "id": "icon_2627_gold",
+  "f": "play/icon_en.png",
+  "box": [
+   880,
+   870,
+   1100,
+   1090
+  ],
+  "k": 4,
+  "scale": 1.0
+ }
+]
