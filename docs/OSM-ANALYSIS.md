@@ -230,7 +230,7 @@ The match itself is simulated on the server at the fixed time. You watch it afte
 ### Condition, injuries and discipline
 
 - **Fitness and morale** both have a "big impact on performance" [C wiki]. Field rule: don't start players below ~85% fitness [C].
-- **Injuries:** each injury type has a minimum and maximum duration in weeks and a probability [V client]. The **Doctor** treats a player, shortening recovery by 1–3 days per treatment, about every 8 h [C].
+- **Injuries:** each injury type has a minimum and maximum duration in weeks and a probability [V client]. The **Doctor** treats a player, cutting **1–3 matches** per treatment, with each treatment taking about 8 h [V staff/C].
 - **Cards:**
   - Yellow and red cards each carry a probability and a ban length [V client].
   - Three yellows means a one-match ban [C].
@@ -415,95 +415,131 @@ The game plan must fit the formation's identity:
 
 ## 10. Training and coaches
 
-### Structure [V client]
+### Coaches [V]
 
-- **Five trainers** (`TrainerType`):
-  - **Attacker coach:** trains forwards' Attack.
-  - **Midfielder coach:** trains midfielders' Overall, meaning +1 Attack and +1 Defence per level.
-  - **Defender coach:** trains defenders' Defence.
-  - **Goalkeeper coach:** trains the keeper's Defence.
-  - **Universal coach:** trains any player and has its own timer (`UniversalTrainerCounting`, `UniversalTraining`).
-- The current UI shows the five as cards with a progress bar and a **"Claim progression"** button. Training builds toward a level, and you claim it when the bar fills.
-- **Each coach has a timer.** Training is countdown-based per line (`ForwardTraining`, `MidfielderTraining`, `DefenderTraining`, `GoalKeeperTraining`).
-- **Training slots** hold players and session counts (`TrainingSlot`).
-- A server variable, `AllowPlayerInTrainingInLineup`, decides whether a player in training can also start a match.
-- The **stadium's Training Facility** is an upgradeable stadium part that boosts training [V client].
-- **Variable progression tiers:** None, Rare, Epic, Elite, Legendary. These are the "Extreme Training / Extreme Progression" boosts handed out by events and the $2.49 "Progression" purchase [V client and store].
+- **Four line coaches:** Attacking (forwards' Attack), Midfield (midfielders' Attack + Defence), Defending (defenders' Defence) and Goalkeeping (keeper's Defence).
+- **Each coach trains one player at a time,** from his own line only, so four players train in parallel.
+- **Coaches are fixed.** There is no hiring or upgrading. They were introduced in their current form in the Nov 2019 staff relaunch [V].
+- **Universal Trainer:** a **fifth, paid** coach that trains one extra player of any position, with "slightly higher progression in a slightly shorter time". It costs **25 BC per 24 hours** [V moderator/staff; tested from Oct 2024]. In the client it is `TrainerType.Universal`, with its own timers [V client].
+- **Claim progression:** a finished session adds nothing until you claim it. "Training progression it's only effective after you claim it" [V staff]. The coach cards in the current UI carry the progress % and the *Claim progression* button.
 
-### Timing and pace [C]
+### Progression [V/C]
 
-- A standard session runs about **8 hours**.
-- Skipping costs about **2 BC per remaining hour**; one rewarded video cuts **30 minutes**.
-- The **Super Staff** event halves sessions to 4 h. **Golden Oldies** makes older players train faster.
-- Young players progress fastest. Development slows with age, and veterans decline [C].
+- A full bar (100%) = **+1 to the main stat**. Midfielders gain +1 Attack and +1 Defence, so Overall +1 [V client].
+- **Typical gain per session:**
+
+| Player rating | Gain per session |
+|---|---|
+| Below 100 | **50–80%** of a level [V moderator] |
+| 100 and above | **20–40%** of a level [V moderator] |
+
+- Gains fall off sharply above ~100–110 [C].
+- **"On Fire" sessions** randomly give a full 100% [C].
+- **Diminishing returns:** about 3 sessions per player per matchday is the practical limit [C].
+- **Age:** young players gain more. 30+ players count as "experienced" and gain less, except during **Golden Oldies** events [V].
+- **Progression tiers** (`VariableTrainingProgression`): None, Rare, Epic, Elite, Legendary [V client]. Events labelled "Higher Training Progression (when claiming)" [V], inventory items (+10%, +25%, +100% for about 50 BC) and the $2.49 "Progression" purchase feed these tiers.
+- **Training Facility** (a stadium part): +10% / +25% / +50% progression at levels 1/2/3 [C].
+- **Friendlies** give progression to the players fielded in them. League matches don't [V staff]. Each friendly costs about 4 BC, with shrinking returns [C].
+- **No conflict with matchday:** since ~Jan 2025, players in training can start matches with no penalty, and can be sold [V moderator]. The server variable `AllowPlayerInTrainingInLineup` controls this [V client].
+
+### Timers
+
+| Timer | Default | Event versions |
+|---|---|---|
+| Training session | **8 h** [V] | Super Staff 2 h, Extreme Training 3 h, Top Facilities 4 h, Stadium Blitz 5 h [V official event schedule] |
+| Universal Trainer | ~6 h [C] | Always shorter than the line coaches during events [V] |
+
+- **Speed-ups:** Boss Coins finish a session instantly; one rewarded video cuts 2 h [C, current forum]. Older guides gave 2 BC per hour and 30 minutes per video [C 2020].
 
 ### How to train well [C]
 
-- Train the players who start every match first, because the strength number uses only your best N per line.
-- Keep every coach busy all day. Idle timers are the biggest waste in OSM.
-- Line up training to finish before matchday. A completed session also counts toward the match preparation score [V client].
+- Keep all four coaches busy all the time. Idle timers are the biggest waste in OSM.
+- Train the players who start every match. The strength badge counts only the best N per line.
+- Claim progress before the simulation.
+- Lean on young players while they still progress fast.
 
 ---
 
 ## 11. Transfers and scouting
 
-### Ways to acquire a player [V client `TransferType`]
+### Ways to acquire a player [V client `TransferType`; V FAQ]
 
 | Route | How it works |
 |---|---|
-| **Transfer list** | Players listed by CPU and human clubs, domestic and abroad |
-| **Special offer** | A time-limited offer of a specific player, priced in club funds and/or Boss Coins (`SpecialOffer`) |
-| **Scout** | You send the scout with filters; it returns up to **3 matching players**, or the closest matches [V FAQ] |
-| **Offer / negotiation** | Bid on a human manager's player. Bids can be countered, accepted, rejected or withdrawn (`OfferStatus`) [V] |
-| **Quick sell** | Sell instantly to the market at a server-set percentage of value (`QuickSellPricePercentage`) |
-| **Cash buy** | Buy outright |
-| **Legend / In-Form** | Special rarities listed during events, at about 100 BC for Legends [V forum] |
-| **Random player / player pack** | Bronze, Silver or Gold packs with rarity odds |
+| **Transfer list** | Players listed by computer and human clubs, domestic and foreign |
+| **Scout** | Up to 6 criteria (line, specific position, age, quality, style, nationality, league). Returns with **3 players** after a **16 h** trip; Super Staff makes it 4 h and some events 2 h. Scouted players are **reserved for 30 minutes**. Signing one costs club funds **plus 15 BC** [V]. **World Star (100+) scouting** was added in Feb 2022 and costs extra BC: 50 → 55 → 68 BC by 2026 [V/C] |
+| **Negotiations** | Bid on any club **in your own league**, human or computer. Computer clubs don't reply in pre-season, then answer at the next transfer round. Offers stay open until rejected and can't be blocked. `OfferStatus`: Created, CounterOfferSent, Accepted, Rejected, Withdrawn [V] |
+| **Special offer** | A time-limited player deal priced in club funds and/or BC [V client] |
+| **Legends / In-Form** | Event rarities. A Legend costs the transfer-list price **plus 100 BC** [V staff] |
+| **Player pack** | Bronze, Silver or Gold. Gives **3 random players**, with odds by rarity, and must be used within 7 days [V] |
+| **Quick sell** | Sell instantly **at player value for 5 BC** [V staff]. The percentage is a server variable (`QuickSellPricePercentage`) [V client] |
 
 ### Market rules
 
-- **Asking-price cap:** a listing cannot exceed a server-set percentage of the player's value (`MaxSalePercentage`) [V client]. This is the main brake on value-pumping between friends.
-- **Signing fee:** completing a signing costs a small Boss Coin fee, or a rewarded video in its place [C].
-- **League settings:** custom leagues can switch transfers off entirely, or forbid Boss Coin transfers [V client].
-- **Illegal transfers:** lopsided deals between human clubs are bannable [V].
-- **Scout filters** (`ScoutInstruction`): line, specific position, age category, quality band, style, nationality, country and league [V client].
-- **Scout timing:** a search takes about **16 hours**; the **Transfer Madness** event cuts it to 2 h [V forum].
-- **Scarcity:** "quality players are scarce and competition is heavy" [V FAQ]. Every manager in an instance competes for the same pool.
+- **No transfer windows.** The market runs all season unless a custom-league moderator switches it off [V].
+- **No loans.** "We will not do a loan on players to prevent cheating" [V moderator].
+- **No wages and no player contracts.** The only "contract" in OSM is the manager's own one-season deal [V].
+- **Price band:** asking price runs from **0.75× to 2.5× value** [C]. The cap is the server variable `MaxSalePercentage` [V client]. This is the main brake on value-pumping between friends.
+- **Listing limit:** up to **4** players at once, or 6 during Transfer Madness [V].
+- **Transfer rounds:** the market engine adds listings and makes purchases **up to 9 times a day at random times** [V moderator].
+- **Computer-listed players** drop in price each round, never below value, and are pulled at about 1.2× value [V moderator].
+- **Selling is probabilistic.** Higher asking prices sell slower, late-season sales are harder, players under €10M sell easily and €30M+ players are hard to move. Staff confirmed sale chance and margins are formula-driven [V].
+- **Shortfalls:** if the league's "club funds compensation" setting is on, Boss Coins cover a funds shortfall [V].
+- **Anti-collusion:** Terms point 8 bans using transfers to give one club an unfair advantage, and joining and resigning to collude. Manager-to-manager bids are capped by hidden limits [V/C].
+
+### Player value [C]
+
+There is no official formula. Fan calculators show that value **roughly doubles with every +10 rating** and declines with age (about 1% a year until 30, faster after).
+
+| Rating | Approximate value |
+|---|---|
+| 80 | ~€10M |
+| 90 | ~€21M |
+| 100 | ~€39M |
+| 110–115 | €120–150M late in a season |
 
 ---
 
 ## 12. Club: finances, stadium, sponsors, board
 
-### Finances [V client `TeamFinance`]
+### Finances [V client `TeamFinance`, V forum]
 
-- **Income lines:**
-  - **Fixed income**: TV and base money.
-  - **Board sponsors** (`boardingSponsors`).
-  - **Gate receipts.**
-  - **Interest on savings.**
-- Prize money and player sales add to the budget [C].
-- **The bank:** move money between the club balance and **savings** (`MoneyTransferType`: Withdraw / Deposit) [V]. Saved money earns interest; spendable money sits in the budget. There is an achievement for saving all club funds [C].
-- **Club money stays in its slot.** It does not move between slots [C], and it is lost when the season resets [V by design].
+- **Fixed income** arrives every matchday. A lower club objective means a smaller fixed income [C].
+- **Gate receipts and sponsor money come only from home matches.** Cup ties are on neutral ground and pay about half [V].
+- **Savings earn 2% per match,** but only if the money sits in Savings during the simulation [V moderator]. Events can raise the rate. The bank works through `MoneyTransferType` Deposit / Withdraw [V client].
+- **Transfers are the main income;** tickets are minor [C].
+- **Staff are free.** Since Dec 2020 the Doctor, Lawyer, Data Analyst, Scout and Coaches cost no club funds [V staff]. The client still carries a server-set "% of budget" price hook for the Data Analyst [V client].
+- **Club money stays in its slot** and is lost when the season resets [V]. Savings carry into the Winners Cup [C].
+- No debt, bankruptcy or financial-sacking rules exist in any source [V by absence].
 
 ### Stadium [V client]
 
-- **Three stadium parts**, each with levels, XP thresholds, a bonus and an upgrade timer:
-  1. **Capacity:** more seats means more gate receipts.
-  2. **Pitch:** gives a home-match strength bonus. Levels 1/2/3 are commonly given as +2/+4/+6% [C].
-  3. **Training Facility:** faster or better training.
-- Upgrades take real time. You can speed them up with BC, and the **Stadium Blitz** event cuts them to 4 h [V].
+- **Three parts,** each with levels, XP thresholds, a bonus and an upgrade timer:
 
-### Sponsors [V client]
+| Part | Bonus |
+|---|---|
+| **Capacity** | Ticket income only |
+| **Pitch** | Home performance; +2/+4/+6% at levels 1/2/3 [C] |
+| **Training Facility** | Training progression; +10/+25/+50% [C] |
 
-- There is **one sponsor per stand: North, East, South and West**.
-- Each sponsor has a `fixedFactor`, a contract length in weeks, weeks remaining and revenue per matchday.
-- Field reports put each sponsor at roughly 100–200K per matchday in top leagues [C].
+- **Upgrade timer:** **18 h** [V]. Stadium Blitz cuts it to 4 h; ads cut 2 h, up to 3 times [V/C].
+- **Number of upgrade steps** grows with the league's length [V].
+- **Paid in club funds,** or in BC when funds run short [C].
+- **Example payback:** a capacity level costs ~€0.74M and adds ~€0.14M per home match [C].
+- **No ticket-price setting** exists [C].
+
+### Sponsors [V]
+
+- **One slot per stand: North, East, South, West** (`SponsorSide`) [V client].
+- **Offers scale with league position against your objective** [V staff].
+- **Deals run for a number of home matches** (1–3 weeks) [V].
+- **Pick at least one to get paid.** Several can run at once [V].
+- **No per-win or per-goal bonuses** [V by absence].
 
 ### Board and objective [V client]
 
-- Every club has a **goal**, a target league position such as champion or top 4, set by the board.
-- **The board:** Chairman, Advisor and Analyst.
-- **Board mood** follows your position against the goal:
+- Every club has a **goal**: a target league position set by the board (Chairman, Advisor, Analyst).
+- **Board mood:**
 
 | Situation | Mood |
 |---|---|
@@ -513,29 +549,28 @@ The game plan must fit the formation's identity:
 | Exactly on target | Satisfied |
 | Below target | Angry |
 
-- The board does **not** fire managers for results. You leave a club by:
-  - **resigning:** blocked in pre-season, on the last day and in about the final 20% of the season; final, and recorded on your profile;
-  - **being kicked by a custom-league moderator** for inactivity;
+- **The board never sacks you for results.** You lose a club only by:
+  - **resigning:** blocked in pre-season, on the last day and in about the final 20% of the season; final, and counted on your profile;
+  - **being kicked by a custom-league moderator** for 72 h+ inactivity;
   - **being removed by staff** for cheating [V].
 
 ---
 
 ## 13. Staff
 
-`StaffMemberType` lists eight staff roles [V client]:
+`StaffMemberType` lists the staff [V client]. All of them are free in club funds since Dec 2020 [V].
 
-| Staff | What they do |
-|---|---|
-| **Data Analyst ("Spy")** | Reports the next opponent's formation and variant, game plan, tackling, marking, offside trap, line-up, pitch level and bonus, and whether a training camp is active [V]. Cost: a percentage of club funds; the timer can be boosted with BC or a video [V]. Takes about 1 h, and the report is deleted after the matchday [C] |
-| **Attacker coach** | Trains forwards (Attack) |
-| **Midfielder coach** | Trains midfielders (Attack and Defence) |
-| **Defender coach** | Trains defenders (Defence) |
-| **Goalkeeper coach** | Trains keepers (Defence) |
-| **Scout** | Searches for players using filters; about 16 h [V forum] |
-| **Doctor** | Treats injured players, cutting 1–3 days per treatment, about every 8 h; BC can boost it [V client; C timings] |
-| **Lawyer** | Appeals a suspension, once per player; about 8 h; BC can boost it [V client; C timings] |
+| Staff | What they do | Time |
+|---|---|---|
+| **Data Analyst** (the "Spy" until 2019) | Reports the next opponent's formation and variant, game plan, tackling, marking, offside trap, line-up, pitch level and bonus, and camp status [V client]. The report is deleted after the matchday [C] | ~1 h; 15 min in Super Staff [C/V] |
+| **Scout** | Filtered player search returning 3 players | 16 h; 4 h or 2 h in events [V] |
+| **Doctor** | Cuts **1–3 matches** off an injury per treatment, one player at a time, repeatable. Injuries also tick down one per matchday [V staff/C] | ~8 h; 3 h in Super Staff [C/V] |
+| **Lawyer** | One suspension appeal per player. Can't appeal a yellow-accumulation ban [C] | ~8 h; 3 h in Super Staff [C/V] |
+| **Four line coaches** | Training (section 10) | 8 h |
+| **Universal Trainer** | Extra coach for any position, 25 BC per 24 h | ~6 h |
 
-The client's cast of characters ("dudes") also includes Manager, Assistant, Trainer, Chairman and Agent. They voice tutorials, news and offers [V client].
+- Every staff timer can be sped up with BC or a rewarded video. Ad speed-ups are capped at 3 per hour [V].
+- The client's cast of characters ("dudes") adds Manager, Assistant, Trainer, Chairman and Agent. They voice tutorials, news and offers [V client].
 
 ---
 
@@ -543,12 +578,12 @@ The client's cast of characters ("dudes") also includes Manager, Assistant, Trai
 
 | Boost | Effect |
 |---|---|
-| **Training Camp** | A strength boost for one match (`CampBoostPercentage`, server-set) [V]. Commonly given as **+25%** [C]. Limited to **6 per league**, with cost rising 10 → 20 → 50 → 100 → 200 → 500 BC [C]. **The opponent gets a push notification** ("OpponentTrainingCamp") unless you also run secret training [V client / C] |
-| **Secret Training** | Blocks the opponent's Data Analyst and friendly challenges, and adds a small boost (`SecretBoostPercentage`, about +2.5%) [V/C]. Costs about 3 BC; 6 per league [C] |
+| **Training Camp** | **+25%** for the next match [V moderator]. The value is `CampBoostPercentage`, set on the server [V client]. Limited to **6 per league**, costing **10 → 20 → 50 → 100 → 200 → 500 BC** [C]. **The opponent gets a push notification** ("OpponentTrainingCamp") [V client] unless you also run Secret Training [V moderator] |
+| **Secret Training** | Hides your tactics from the Data Analyst, blocks friendly challenges and masks your camp notification. Adds a small boost, about +2.5% (`SecretBoostPercentage`) [V/C]. **3 BC**, 6 per league [C] |
 | **Daily-login streak** | A consecutive-login track adds a `matchBoost` on top of the camp [V client] |
-| **Pitch level** | Home bonus from the stadium (section 12) [V/C] |
-| **Nationality bonus** | About 6 starters of one nationality [C] |
-| **Match preparation** | Completing the checklist (section 4) is the free baseline |
+| **Pitch level** | +2/+4/+6% at home [C] |
+| **Nationality bonus** | About 6 starters of one nationality; size disputed [C] |
+| **Match preparation** | Completing the checklist in section 4 is the free baseline |
 
 Custom leagues can switch off training camps, secret training and consumables to make a purely skill-based league [V client].
 
@@ -560,7 +595,7 @@ Custom leagues can switch off training camps, secret training and consumables to
 
 | Currency | Earned from | Spent on |
 |---|---|---|
-| **Club funds** | Gate receipts, sponsors, fixed income, prize money, player sales, interest on savings | Players, wages/transfer fees, stadium upgrades, the Data Analyst, staff actions |
+| **Club funds** | Gate receipts and sponsors (home matches), fixed income, prize money, player sales, 2% interest per match on savings | Players (transfer fees), stadium upgrades. There are no wages, and staff have been free since Dec 2020 |
 | **Boss Coins (BC)**, the premium currency | Purchase, daily rewards, achievements, division climbing, Business Club offerwall, rewarded videos (1 BC per ad, capped per hour), missions, events, season completion [V/C] | Speed-ups and premium actions (see the list below) |
 
 - Boss Coins are shared across all of a manager's slots and platforms [V].
@@ -601,7 +636,7 @@ From the client's `PaidGameOption`, the authoritative list [V client]:
 
 ### Ads
 
-- **Rewarded video** pays BC, skips 30 min of training, or replaces a 1-BC fee for signing a transfer [C].
+- **Rewarded video** pays BC (1 BC each, capped per hour), cuts 2 h off training or stadium timers, or replaces a small BC fee when signing a transfer [C].
 - Video ads run in a **3-ad streak** with rising cash rewards (client `WatchAdsStreak`) [V/C].
 - Purchases remove **banner** ads only [C].
 - Mediation runs Google AdMob, Meta, AppLovin, Unity and Fyber (15 networks), plus AppsFlyer, Firebase and CleverTap [C tracker].
@@ -637,9 +672,9 @@ From the client's `PaidGameOption`, the authoritative list [V client]:
 |---|---|
 | **Legends** | Legend players listed for BC |
 | **Training Camp Mania** | Camp discounts |
-| **Stadium Blitz** | 4 h stadium upgrades |
+| **Stadium Blitz** | 4 h stadium upgrades (normally 18 h) |
 | **Transfer Madness** | Up to 6 players listed; scout takes 2 h instead of 16 h |
-| **Super Staff** | Training 4 h instead of 8 h |
+| **Super Staff** | Staff timers slashed: training 2 h, scout 4 h, doctor and lawyer 3 h, analyst 15 min |
 | **Golden Oldies** | Older players train faster |
 | **Bargain Scout** | Cheaper scouting |
 | **Intense Friendlies** | Boosted friendlies |
