@@ -1,0 +1,132 @@
+/* OSMWiz design tokens. Generated from OSMWiz_Visual_System.html.
+   Measured from Online Soccer Manager 26/27 store art and the live web client; see EVIDENCE.md. */
+:root {
+  color-scheme: dark;
+
+  /* grounds — navy, never black: every ground measured at hue 205–215 */
+  --abyss:    #020D17;   /* info strips, notch tabs */
+  --deep:     #0A1A2D;   /* scoreboard, minute bubble, page ground */
+  --pill:     #001C31;   /* formation pill, side labels */
+  --card:     #002037;   /* tactic card */
+  --panel:    #021E35;   /* coach panel */
+  --bar-1:    #022B4D;   /* top bar, upper */
+  --bar-2:    #011D30;   /* top bar, lower */
+  --event:    #07243F;   /* match event pill */
+  --rail:     #0B4169;   /* bench rail */
+
+  /* royal — the backdrop behind panels */
+  --ro-deep:  #00145A;
+  --ro-body:  #00165D;
+  --ro-mid:   #022F6D;
+  --ro-rim:   #154B96;
+  --ro-peak:  #2586D2;
+
+  /* sky — information: headers, links, help, labels */
+  --sk-deep:  #005C7F;
+  --sk-body:  #0096E3;
+  --sk-mid:   #00A8FF;
+  --sk-rim:   #00BBFE;
+  --sk-peak:  #5AC8FA;
+
+  /* ice — the in-app primary on dark cards */
+  --ic-shadow:#6DB1E9;
+  --ic-body:  #99D6FB;
+  --ic-mid:   #B3ECFF;
+  --ic-rim:   #D4FBFF;
+  --ic-ink:   #1E3459;
+
+  /* ring — rating circles */
+  --rg-deep:  #003248;
+  --rg-body:  #0A3E55;
+  --rg-mid:   #1E89A0;
+  --rg-rim:   #49B9C6;
+  --rg-peak:  #5BCFD8;
+
+  /* gold — prestige: frames, hairlines, numerals, VS */
+  --gd-shadow:#634F3F;
+  --gd-body:  #A2855F;
+  --gd-mid:   #DFC091;
+  --gd-num:   #E4C197;
+  --gd-peak:  #F2E6CA;
+  --vs-1:     #EEE164;
+  --vs-2:     #CFAF43;
+
+  /* green — growth: fills that grow */
+  --gr-deep:  #0E3014;
+  --gr-chip:  #19560F;
+  --gr-btn:   #16B800;
+  --gr-bar:   #50F12E;
+  --gr-neon:  #00FA33;
+
+  /* orange — commit, and the brand's own colour */
+  --or-hover: #EC781E;
+  --or-body:  #FC8C21;
+  --or-peak:  #FEA153;
+  --osm-red:  #E93323;   /* wordmark, measured from the 26/27 icon */
+  --osm-or:   #ED8537;
+
+  /* singles */
+  --amber:    #B37608;   /* draw chip */
+  --amber-2:  #E5A523;   /* star-player badge */
+  --red:      #D9534F;   /* web danger */
+  --red-hover:#C9302C;
+  --arrow:    #FC3018;   /* game-plan arrows, sub out */
+  --select:   #FFE800;   /* selected label */
+  --missed:   #00C7C8;   /* missed chance */
+  --disabled: #B3B3B3;
+  --navy-btn: #061C2B;
+  --alt-btn:  #154B96;
+  --sel-btn:  #04335A;
+  --sel-on:   #062C4C;
+
+  /* paper — the light data surface */
+  --paper:      #FFFFFF;
+  --paper-star: #FFF8E5;
+  --paper-line: #E3E3E3;
+  --paper-ink:  #121212;
+  --paper-dim:  #828285;
+
+  /* text on navy */
+  --ink:      #FFFFFF;
+  --ink-2:    #C6CCD1;
+  --ink-3:    #899AA7;
+  --ink-4:    #4E6274;
+  --label:    #66DEFF;   /* app label, glyph core */
+  --link:     #5AC8FA;   /* web link, computed */
+  --tab-ink:  #64BFDE;   /* "Next match" notch tab */
+
+  /* chalk — the half that is ours */
+  --board:     #0D1410;
+  --board-rim: #2C3A30;
+  --chalk:     #E8F3EA;
+  --chalk-2:   #9BB0A2;
+  --pen:       #FC8C21;  /* the orange pen, reused from the game */
+
+  /* type */
+  --display: 'Saira Condensed', 'Sofia Sans Condensed', 'Arial Narrow', sans-serif;
+  --ui:      'Helvetica Neue', -apple-system, BlinkMacSystemFont, Roboto, 'Segoe UI', Arial, sans-serif;
+  --mark:    'Anton', 'Arial Narrow', Impact, sans-serif;
+
+  --maxw: 1120px;
+
+  /* gold metal — one gradient shared by every frame and the hairline */
+  --metal: linear-gradient(135deg, var(--gd-peak) 0%, var(--gd-mid) 22%, var(--gd-body) 45%,
+           var(--gd-peak) 58%, var(--gd-mid) 74%, var(--gd-shadow) 100%);
+  --hairline: linear-gradient(90deg, var(--gd-body) 0%, var(--gd-mid) 20%, var(--gd-peak) 50%,
+              var(--gd-mid) 80%, var(--gd-body) 100%);
+  --marble: linear-gradient(135deg, #F9FBFA 0%, #EAEEF8 30%, #CAD2E4 55%, #D8E4F7 72%, #707D98 100%);
+}
+
+/* Texture layers: inline, no image assets */
+:root {
+  /* 3. marble veins — fractal noise thresholded into thin bands */
+  --veins: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='420'%3E%3Cfilter id='m' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0022 0.0085' numOctaves='3' seed='11'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 0 0 0 0 0.6 0 0 0 0 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)' opacity='0.13'/%3E%3C/svg%3E");
+  /* 4. floodlights over the royal backdrop */
+  --flood:
+    radial-gradient(60% 55% at 16% -8%, rgba(150,195,255,.30), transparent 70%),
+    radial-gradient(55% 50% at 86% -10%, rgba(150,195,255,.24), transparent 70%),
+    linear-gradient(180deg, #04173A 0%, var(--ro-mid) 55%, var(--ro-body) 100%);
+  /* 5. the card streak */
+  --streak: linear-gradient(115deg, transparent 0 36%, rgba(150,78,34,.35) 42%,
+            rgba(214,136,62,.55) 47%, rgba(240,200,140,.40) 50%, rgba(120,62,30,.30) 54%, transparent 62%);
+}

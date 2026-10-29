@@ -1,0 +1,1486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+</head>
+<body>
+<title>OSMWiz Visual System</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Saira+Condensed:wght@300;400;500;600;700;800&display=swap">
+
+<style>
+/* ============================================================
+   OSMWiz Visual System
+   Derived from 41 official images of Online Soccer Manager 26/27
+   (App Store, Google Play, the live web client) plus the web
+   client's computed styles. Single-theme by commitment: OSM has no
+   light mode, so this spec does not invent one. Every colour is
+   painted explicitly so the page holds on either host ground.
+   Layout: the game's own top bar as the page header, navy reading
+   ground, components staged on the game's royal backdrop.
+   ============================================================ */
+
+:root {
+  color-scheme: dark;
+
+  /* grounds — navy, never black: every ground measured at hue 205–215 */
+  --abyss:    #020D17;   /* info strips, notch tabs */
+  --deep:     #0A1A2D;   /* scoreboard, minute bubble, page ground */
+  --pill:     #001C31;   /* formation pill, side labels */
+  --card:     #002037;   /* tactic card */
+  --panel:    #021E35;   /* coach panel */
+  --bar-1:    #022B4D;   /* top bar, upper */
+  --bar-2:    #011D30;   /* top bar, lower */
+  --event:    #07243F;   /* match event pill */
+  --rail:     #0B4169;   /* bench rail */
+
+  /* royal — the backdrop behind panels */
+  --ro-deep:  #00145A;
+  --ro-body:  #00165D;
+  --ro-mid:   #022F6D;
+  --ro-rim:   #154B96;
+  --ro-peak:  #2586D2;
+
+  /* sky — information: headers, links, help, labels */
+  --sk-deep:  #005C7F;
+  --sk-body:  #0096E3;
+  --sk-mid:   #00A8FF;
+  --sk-rim:   #00BBFE;
+  --sk-peak:  #5AC8FA;
+
+  /* ice — the in-app primary on dark cards */
+  --ic-shadow:#6DB1E9;
+  --ic-body:  #99D6FB;
+  --ic-mid:   #B3ECFF;
+  --ic-rim:   #D4FBFF;
+  --ic-ink:   #1E3459;
+
+  /* ring — rating circles */
+  --rg-deep:  #003248;
+  --rg-body:  #0A3E55;
+  --rg-mid:   #1E89A0;
+  --rg-rim:   #49B9C6;
+  --rg-peak:  #5BCFD8;
+
+  /* gold — prestige: frames, hairlines, numerals, VS */
+  --gd-shadow:#634F3F;
+  --gd-body:  #A2855F;
+  --gd-mid:   #DFC091;
+  --gd-num:   #E4C197;
+  --gd-peak:  #F2E6CA;
+  --vs-1:     #EEE164;
+  --vs-2:     #CFAF43;
+
+  /* green — growth: fills that grow */
+  --gr-deep:  #0E3014;
+  --gr-chip:  #19560F;
+  --gr-btn:   #16B800;
+  --gr-bar:   #50F12E;
+  --gr-neon:  #00FA33;
+
+  /* orange — commit, and the brand's own colour */
+  --or-hover: #EC781E;
+  --or-body:  #FC8C21;
+  --or-peak:  #FEA153;
+  --osm-red:  #E93323;   /* wordmark, measured from the 26/27 icon */
+  --osm-or:   #ED8537;
+
+  /* singles */
+  --amber:    #B37608;   /* draw chip */
+  --amber-2:  #E5A523;   /* star-player badge */
+  --red:      #D9534F;   /* web danger */
+  --red-hover:#C9302C;
+  --arrow:    #FC3018;   /* game-plan arrows, sub out */
+  --select:   #FFE800;   /* selected label */
+  --missed:   #00C7C8;   /* missed chance */
+  --disabled: #B3B3B3;
+  --navy-btn: #061C2B;
+  --alt-btn:  #154B96;
+  --sel-btn:  #04335A;
+  --sel-on:   #062C4C;
+
+  /* paper — the light data surface */
+  --paper:      #FFFFFF;
+  --paper-star: #FFF8E5;
+  --paper-line: #E3E3E3;
+  --paper-ink:  #121212;
+  --paper-dim:  #828285;
+
+  /* text on navy */
+  --ink:      #FFFFFF;
+  --ink-2:    #C6CCD1;
+  --ink-3:    #899AA7;
+  --ink-4:    #4E6274;
+  --label:    #66DEFF;   /* app label, glyph core */
+  --link:     #5AC8FA;   /* web link, computed */
+  --tab-ink:  #64BFDE;   /* "Next match" notch tab */
+
+  /* chalk — the half that is ours */
+  --board:     #0D1410;
+  --board-rim: #2C3A30;
+  --chalk:     #E8F3EA;
+  --chalk-2:   #9BB0A2;
+  --pen:       #FC8C21;  /* the orange pen, reused from the game */
+
+  /* type */
+  --display: 'Saira Condensed', 'Sofia Sans Condensed', 'Arial Narrow', sans-serif;
+  --ui:      'Helvetica Neue', -apple-system, BlinkMacSystemFont, Roboto, 'Segoe UI', Arial, sans-serif;
+  --mark:    'Anton', 'Arial Narrow', Impact, sans-serif;
+
+  --maxw: 1120px;
+
+  /* gold metal — one gradient shared by every frame and the hairline */
+  --metal: linear-gradient(135deg, var(--gd-peak) 0%, var(--gd-mid) 22%, var(--gd-body) 45%,
+           var(--gd-peak) 58%, var(--gd-mid) 74%, var(--gd-shadow) 100%);
+  --hairline: linear-gradient(90deg, var(--gd-body) 0%, var(--gd-mid) 20%, var(--gd-peak) 50%,
+              var(--gd-mid) 80%, var(--gd-body) 100%);
+  --marble: linear-gradient(135deg, #F9FBFA 0%, #EAEEF8 30%, #CAD2E4 55%, #D8E4F7 72%, #707D98 100%);
+}
+
+/* ---------- textures: five layers, all inline, no assets ---------- */
+:root {
+  /* 3. marble veins — fractal noise thresholded into thin bands */
+  --veins: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='420'%3E%3Cfilter id='m' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0022 0.0085' numOctaves='3' seed='11'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 0 0 0 0 0.6 0 0 0 0 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)' opacity='0.13'/%3E%3C/svg%3E");
+  /* 4. floodlights over the royal backdrop */
+  --flood:
+    radial-gradient(60% 55% at 16% -8%, rgba(150,195,255,.30), transparent 70%),
+    radial-gradient(55% 50% at 86% -10%, rgba(150,195,255,.24), transparent 70%),
+    linear-gradient(180deg, #04173A 0%, var(--ro-mid) 55%, var(--ro-body) 100%);
+  /* 5. the card streak */
+  --streak: linear-gradient(115deg, transparent 0 36%, rgba(150,78,34,.35) 42%,
+            rgba(214,136,62,.55) 47%, rgba(240,200,140,.40) 50%, rgba(120,62,30,.30) 54%, transparent 62%);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--deep);
+  color: var(--ink);
+  font-family: var(--ui);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 30; background: var(--bar-2);
+}
+
+.wrap {
+  max-width: var(--maxw); margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px));
+}
+@media (max-width: 720px) {
+  .wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+}
+
+/* ============================================================
+   TOP BAR — the page header is the game's own top bar
+   ============================================================ */
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: linear-gradient(180deg, var(--bar-1), var(--bar-2));
+}
+.topbar::after { content: ""; display: block; height: 3px; background: var(--hairline); }
+.topbar__in { display: flex; align-items: center; gap: 18px; min-height: 58px; }
+.topbar__brand { font-family: var(--mark); font-size: 21px; letter-spacing: .04em; white-space: nowrap; line-height: 1; }
+.topbar__brand i { font-style: normal; color: var(--ink-3); }
+.topbar nav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; min-width: 0; flex: 1 1 auto; }
+.topbar nav::-webkit-scrollbar { display: none; }
+.topbar nav a {
+  flex: none; font-family: var(--display); font-weight: 700; font-size: 15px;
+  letter-spacing: .08em; text-transform: uppercase; text-decoration: none;
+  color: var(--ink-3); padding: 7px 11px; border-radius: 6px;
+}
+.topbar nav a:hover { color: var(--ink); }
+.topbar nav a.is-active { color: var(--select); background: var(--sel-on); }
+.topbar nav a:focus-visible { outline: 2px solid var(--sk-peak); outline-offset: -2px; }
+
+/* ============================================================
+   MASTHEAD
+   ============================================================ */
+.masthead { background: var(--veins), var(--flood); background-size: 640px 420px, auto; position: relative; }
+.masthead::after { content: ""; display: block; height: 3px; background: var(--hairline); }
+.masthead__body { padding-block: 44px 34px; }
+.notch {
+  display: inline-block; background: var(--abyss); color: var(--tab-ink);
+  font-family: var(--ui); font-weight: 700; font-size: 14px; padding: 5px 16px 6px;
+  border-radius: 0 0 9px 9px; clip-path: polygon(0 0, 100% 0, 92% 100%, 8% 100%);
+  padding-inline: 22px;
+}
+.masthead h1 {
+  font-family: var(--display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(40px, 7.4vw, 76px); line-height: .92; letter-spacing: .005em;
+  margin: 16px 0 0; text-wrap: balance; text-shadow: 0 3px 12px rgba(0,0,0,.45);
+}
+.masthead h1 em { font-style: normal; color: var(--or-body); }
+.masthead p.lede { margin: 16px 0 0; max-width: 64ch; color: var(--ink-2); font-size: 16px; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; }
+.stats li {
+  background: rgba(0,0,0,.45); border-radius: 6px; padding: 6px 12px 7px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+  font-family: var(--display); font-weight: 600; font-size: 14px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.stats b { font-family: var(--display); font-weight: 800; font-size: 18px; color: var(--ink);
+  letter-spacing: 0; margin-right: 6px; font-variant-numeric: tabular-nums; }
+
+/* ============================================================
+   SECTION — cyan label beside a white value, the game's pattern
+   ============================================================ */
+section { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 72px); }
+.sec-head {
+  margin-top: 56px;
+  background: linear-gradient(180deg, var(--card), var(--deep));
+  box-shadow: inset 0 2px 0 rgba(105,177,197,.55);
+  padding-block: 16px 14px;
+}
+.sec-head__in { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.sec-head h2 {
+  margin: 0; font-family: var(--display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(26px, 4vw, 36px); letter-spacing: .02em; line-height: 1;
+}
+.sec-head p { margin: 0; color: var(--label); font-weight: 700; font-size: 15px; }
+.sec-body { padding-block: 26px 4px; }
+
+h3 {
+  font-family: var(--display); font-weight: 700; font-size: 17px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-3); margin: 38px 0 14px;
+}
+h3:first-child { margin-top: 0; }
+p { max-width: 68ch; }
+.lede { color: var(--ink-2); font-size: 16px; }
+strong { font-weight: 700; color: var(--ink); }
+code {
+  font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .86em;
+  background: var(--abyss); border-radius: 4px; padding: 1px 5px; color: var(--gd-num);
+}
+.note {
+  background: var(--abyss); border-radius: 6px; padding: 13px 16px; margin: 20px 0; max-width: 74ch;
+  box-shadow: inset 3px 0 0 var(--or-body);
+}
+.note p { margin: 0; }
+.note--ice { background: var(--ic-mid); color: var(--ic-ink); box-shadow: inset 3px 0 0 var(--ic-shadow); }
+.note--ice strong { color: #071533; }
+.tag {
+  display: inline-block; font-family: var(--display); font-weight: 700; font-size: 12px;
+  letter-spacing: .1em; text-transform: uppercase; padding: 1px 7px; border-radius: 4px; vertical-align: 2px;
+}
+.tag--v { background: var(--gr-chip); color: #CFF7C4; }
+.tag--m { background: var(--rg-body); color: var(--rg-peak); }
+.tag--d { background: #3A2A12; color: var(--gd-num); }
+
+/* the stage: components sit on the game's royal backdrop */
+.stage {
+  background: var(--veins), var(--flood); background-size: 640px 420px, auto;
+  border-radius: 8px; padding: 22px; margin: 6px 0 18px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.5);
+  overflow-x: auto;
+}
+.row { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; }
+.case { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.case small {
+  font-family: var(--display); font-weight: 600; font-size: 13px; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--ink-2);
+}
+
+/* ============================================================
+   COLOUR
+   ============================================================ */
+.ramp { margin-bottom: 22px; }
+.ramp__label { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.ramp__name { font-family: var(--display); font-weight: 800; font-size: 19px; letter-spacing: .08em; text-transform: uppercase; }
+.ramp__role { color: var(--ink-3); font-size: 14px; }
+.ramp__bar { display: flex; border-radius: 6px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(0,0,0,.45); }
+.sw { flex: 1 1 0; min-width: 0; padding: 18px 8px 9px; }
+.sw code { display: block; background: none; padding: 0; font-size: 10.5px; }
+.sw.d code { color: rgba(255,255,255,.92); text-shadow: 0 1px 2px rgba(0,0,0,.8); }
+.sw.l code { color: rgba(0,0,0,.78); }
+.sw span { display: block; font-family: var(--display); font-weight: 600; font-size: 11px; letter-spacing: .06em;
+  text-transform: uppercase; margin-top: 2px; }
+.sw.d span { color: rgba(255,255,255,.6); }
+.sw.l span { color: rgba(0,0,0,.55); }
+
+.grounds { display: grid; grid-template-columns: repeat(auto-fit, minmax(126px, 1fr)); gap: 3px; }
+.grounds div { padding: 30px 10px 11px; border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.04); }
+.grounds code { background: none; padding: 0; font-size: 11px; color: var(--ink-2); }
+.grounds span { display: block; font-family: var(--display); font-size: 12.5px; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-top: 3px; }
+
+.singles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.single { display: flex; gap: 10px; align-items: center; background: var(--abyss); border-radius: 6px; padding: 9px 10px; }
+.single i { flex: none; width: 30px; height: 30px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); }
+.single b { display: block; font-family: var(--display); font-weight: 700; font-size: 14px; letter-spacing: .05em; text-transform: uppercase; }
+.single code { background: none; padding: 0; font-size: 11px; color: var(--ink-3); }
+
+/* tables */
+.tblwrap { overflow-x: auto; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 540px; }
+.tbl th, .tbl td { text-align: left; padding: 10px 14px 10px 0; border-bottom: 1px solid #142a40; vertical-align: top; }
+.tbl th { font-family: var(--display); font-weight: 700; font-size: 13px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-3); border-bottom-color: #1d3a55; }
+.tbl td:first-child { font-weight: 700; white-space: nowrap; padding-right: 22px; }
+.tbl td:last-child { color: var(--ink-2); }
+
+/* ============================================================
+   TYPE
+   ============================================================ */
+.spec { background: var(--abyss); border-radius: 6px; padding: 18px 20px; margin-bottom: 12px; }
+.spec__meta { font-family: var(--display); font-weight: 600; font-size: 13px; letter-spacing: .11em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; display: flex; gap: 12px; flex-wrap: wrap; }
+.spec__meta b { color: var(--label); font-weight: 700; }
+.spec--display p { font-family: var(--display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(30px, 6vw, 52px); line-height: .95; margin: 0; }
+.spec--num p { font-family: var(--display); font-weight: 800; font-size: clamp(40px, 8vw, 64px);
+  line-height: .9; margin: 0; color: var(--gd-num); font-variant-numeric: tabular-nums; }
+.spec--ui p { font-family: var(--ui); font-size: 17px; margin: 0; max-width: 60ch; }
+.spec--ui p span { font-weight: 400; color: var(--ink-2); }
+.spec--web p { font-family: var(--display); font-weight: 300; font-size: 19px; margin: 0; max-width: 60ch; }
+.spec--web p b { font-weight: 500; }
+
+/* ============================================================
+   TEXTURE demos
+   ============================================================ */
+.tex { height: 84px; border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.5); }
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+
+/* --- the top bar replica --- */
+.gbar { min-width: 560px; border-radius: 6px; overflow: hidden; }
+.gbar__row { display: flex; align-items: stretch; height: 58px; background: linear-gradient(180deg, var(--bar-1), var(--bar-2)); }
+.gbar__tab { flex: none; width: 74px; background: linear-gradient(180deg, #E5EAFA, #BFC9DC);
+  display: grid; place-items: center; clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%); }
+.gbar__tab--r { clip-path: polygon(0 0, 100% 0, 100% 100%, 14% 100%); }
+.gbar__avatar { width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 50% 38%, #8FA7C4 0 28%, #2A4B99 29% 100%);
+  box-shadow: 0 0 0 3px #fff, 0 2px 4px rgba(0,0,0,.4); }
+.gbar__mid { flex: 1; display: flex; align-items: center; gap: 22px; padding-inline: 18px; min-width: 0; }
+.gpill { display: flex; align-items: center; height: 30px; }
+.gpill__coin { width: 34px; height: 34px; border-radius: 50%; margin-right: -12px; position: relative; z-index: 1;
+  display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 15px; }
+.gpill__coin--cash { background: radial-gradient(circle at 40% 35%, #FFFFFF, #DEDEDE 55%, #B7BBBE); color: #8A9096; box-shadow: 0 1px 2px rgba(0,0,0,.5); }
+.gpill__coin--bc { background: radial-gradient(circle at 40% 35%, #FFF6A0, #FFEE2C 50%, #C9A813); color: #2E555E; box-shadow: 0 1px 2px rgba(0,0,0,.5); font-size: 12px; }
+.gpill__val { height: 26px; padding: 0 16px 0 20px; display: flex; align-items: center; gap: 6px;
+  background: linear-gradient(180deg, #ABE0FF, #77C8FF 50%, #5BBBFB); border-radius: 4px;
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+  font-family: var(--display); font-weight: 800; font-size: 17px; color: #0A1F3D; font-variant-numeric: tabular-nums; }
+.gbar__icons { margin-left: auto; display: flex; gap: 14px; }
+.gbar__icons span { width: 24px; height: 24px; border-radius: 6px; background: linear-gradient(180deg, #FFE36A, #E5A523); box-shadow: 0 1px 2px rgba(0,0,0,.5); }
+.gbar__icons span:nth-child(3) { border-radius: 50%; background: radial-gradient(circle, #fff 0 45%, #2586D2 47% 100%); }
+.gbar__menu { display: grid; gap: 4px; }
+.gbar__menu i { display: block; width: 26px; height: 5px; border-radius: 1px; background: #1A2A44; }
+.gbar__hair { height: 3px; background: var(--hairline); }
+
+/* --- buttons: the web client's .btn-new, verbatim structure --- */
+.btn {
+  --b: var(--sk-mid);
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  height: 45px; min-width: 150px; padding: 6px 18px; overflow: hidden;
+  border: 1px solid rgba(0,0,0,.2); border-radius: 6px; background-color: var(--b); background-clip: padding-box;
+  box-shadow: inset 0 -4px 0 -2px rgba(0,0,0,.4), inset 0 4px 1px -2px rgba(255,255,255,.4);
+  font-family: var(--display); font-weight: 800; font-size: 21px; line-height: 1; color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,.7); cursor: pointer;
+}
+.btn::after {
+  content: ""; position: absolute; top: 4px; left: 8px; right: 8px; height: calc(50% - 4px);
+  background: rgba(255,255,255,.4); box-shadow: inset 0 11px 27px 7px var(--b); pointer-events: none;
+}
+.btn > span { position: relative; z-index: 2; }
+.btn:hover { --b: var(--b-hover, #359CFF); }
+.btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.btn--orange { --b: var(--or-body); --b-hover: var(--or-hover); }
+.btn--green  { --b: var(--gr-btn); --b-hover: #3FC933; }
+.btn--navy   { --b: var(--navy-btn); --b-hover: #082032; }
+.btn--navy::after { background: rgba(255,255,255,.2); }
+.btn--alt    { --b: var(--alt-btn); --b-hover: #0C3D7F; }
+.btn--red    { --b: var(--red); --b-hover: var(--red-hover); }
+.btn--off    { --b: var(--disabled); --b-hover: var(--disabled); cursor: not-allowed; }
+
+/* the ice button — the app's in-card primary, measured */
+.ice {
+  display: inline-flex; align-items: center; justify-content: center; height: 46px; min-width: 210px; padding: 0 20px;
+  border: 0; border-radius: 8px; cursor: pointer;
+  background: linear-gradient(180deg, #F4FFFF 0%, var(--ic-rim) 18%, var(--ic-mid) 55%, var(--ic-body) 100%);
+  box-shadow: inset 0 -2px 0 var(--ic-shadow), 0 0 14px rgba(180,236,255,.35), 0 2px 3px rgba(0,0,0,.5);
+  font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: .02em; text-transform: uppercase;
+  color: var(--ic-ink);
+}
+.ice:hover { filter: brightness(1.04); }
+.ice:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+/* selection: the label lights, the fill darkens */
+.sel {
+  height: 40px; padding: 0 16px; border: 0; border-radius: 6px; cursor: pointer;
+  background: var(--sel-btn); font-family: var(--display); font-weight: 800; font-size: 18px; color: #fff;
+}
+.sel.is-on { background: var(--sel-on); color: var(--select); }
+.sel:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* --- rating circles --- */
+.circ {
+  --ring: var(--rg-rim);
+  width: 74px; height: 74px; border-radius: 50%; display: grid; place-items: center; flex: none;
+  background: radial-gradient(circle at 50% 40%, var(--rg-body), var(--rg-deep) 70%);
+  box-shadow: 0 0 0 4px var(--ring), 0 0 14px color-mix(in srgb, var(--ring) 60%, transparent), inset 0 2px 6px rgba(0,0,0,.6);
+  font-family: var(--ui); font-weight: 700; font-size: 28px; color: #fff; font-variant-numeric: tabular-nums;
+}
+.circ small { display: block; font-size: 11px; font-weight: 700; color: var(--label); text-align: center; line-height: 1; margin-bottom: -6px; }
+.circ--sm { width: 46px; height: 46px; font-size: 17px; box-shadow: 0 0 0 3px var(--ring), inset 0 2px 5px rgba(0,0,0,.6); }
+.circ--sm small { font-size: 9.5px; margin-bottom: -4px; }
+.t-blue   { --ring: #2F7FD8; }
+.t-bronze { --ring: #C7864E; }
+.t-silver { --ring: #BDBCBC; }
+.t-gold   { --ring: var(--gd-mid); }
+
+/* --- line-up card (landscape) --- */
+.lcard {
+  position: relative; width: 210px; height: 92px; flex: none;
+  padding: 3px; border-radius: 9px; background: var(--metal);
+  box-shadow: 0 3px 6px rgba(0,0,0,.6);
+}
+.lcard__face {
+  position: relative; height: 100%; border-radius: 6px; overflow: hidden;
+  background: var(--streak), linear-gradient(160deg, #1B2B3D, #0B1A27 70%);
+}
+.lcard__face::before { /* marble corner */
+  content: ""; position: absolute; left: 0; top: 0; width: 34px; height: 34px;
+  background: var(--marble); clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+.lcard__face::after { /* marble edge, lower right */
+  content: ""; position: absolute; right: 0; bottom: 0; width: 22px; height: 22px;
+  background: var(--marble); clip-path: polygon(100% 0, 100% 100%, 0 100%); opacity: .9;
+}
+.lcard__who { position: absolute; left: 22px; bottom: 0; width: 84px; height: 72px; }
+.lcard__who svg { width: 100%; height: 100%; display: block; }
+.lcard__num { position: absolute; right: 22px; bottom: 9px; text-align: right; line-height: .86; color: var(--gd-num); }
+.lcard__num span { display: block; font-family: var(--display); font-weight: 700; font-size: 14px; letter-spacing: .02em; }
+.lcard__num b { font-family: var(--display); font-weight: 800; font-size: 44px; font-variant-numeric: tabular-nums; }
+.lslot {
+  width: 210px; height: 92px; border-radius: 9px; flex: none; display: grid; place-items: center;
+  background: rgba(10,30,48,.82); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 3px 6px rgba(0,0,0,.45);
+}
+.lslot i {
+  width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center;
+  background: #142332; box-shadow: inset 0 0 0 2px #364759;
+  font-style: normal; font-family: var(--ui); font-weight: 300; font-size: 34px; line-height: 1; color: #6A7E92;
+}
+.pitch {
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 60px, transparent 60px 120px),
+    linear-gradient(180deg, #2C5D1C, #235116 50%, #1B4610);
+  border-radius: 8px; padding: 22px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.35);
+}
+
+/* --- portrait card themes --- */
+.pcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 14px; }
+.pcard {
+  --t1: #1B2B4A; --t2: #0B1324; --frame: var(--marble); --num: #fff;
+  position: relative; aspect-ratio: 132 / 178; max-width: 100%;
+  padding: 4px; background: var(--frame);
+  clip-path: polygon(0 6%, 6% 0, 94% 0, 100% 6%, 100% 84%, 50% 100%, 0 84%);
+  filter: drop-shadow(0 3px 4px rgba(0,0,0,.6));
+}
+.pcard__face {
+  position: relative; height: 100%; display: flex; flex-direction: column;
+  background: var(--streak), linear-gradient(165deg, var(--t1), var(--t2));
+  clip-path: polygon(0 6%, 6% 0, 94% 0, 100% 6%, 100% 84%, 50% 100%, 0 84%);
+  padding: 8px 10px 22px; color: var(--num);
+}
+.pcard__top { text-align: right; line-height: .86; }
+.pcard__top span { display: block; font-family: var(--display); font-weight: 700; font-size: 13px; }
+.pcard__top b { font-family: var(--display); font-weight: 800; font-size: 34px; font-variant-numeric: tabular-nums; }
+.pcard__who { flex: 1; display: grid; place-items: end center; }
+.pcard__who svg { width: 70%; height: auto; display: block; }
+.pcard__name { text-align: center; font-family: var(--display); font-weight: 800; font-size: 16px; text-transform: uppercase; letter-spacing: .02em; }
+.pcard__cap { margin-top: 7px; font-family: var(--display); font-weight: 600; font-size: 12.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-2); text-align: center; }
+.th-navy   { --t1: #1E2540; --t2: #0E1426; --frame: var(--metal); --num: var(--gd-num); }
+.th-black  { --t1: #2D2413; --t2: #120E07; --frame: var(--metal); --num: #CAAB5F; }
+.th-emerald{ --t1: #04753F; --t2: #023127; }
+.th-violet { --t1: #A13BF8; --t2: #4619F2; }
+.th-indigo { --t1: #28236A; --t2: #0E0D48; }
+.th-teal   { --t1: #00ACCC; --t2: #014D71; }
+.th-orange { --t1: #E0A050; --t2: #A86312; }
+.th-gold   { --t1: #F7F1BA; --t2: #CDB56C; --num: #27200C; }
+.th-royal  { --t1: #4780B6; --t2: #3949A0; }
+
+/* --- coach card --- */
+.coach { width: 230px; flex: none; border-radius: 8px; padding: 14px 14px 18px; display: grid; justify-items: center; gap: 14px;
+  background: linear-gradient(180deg, var(--panel), #02192C); box-shadow: 0 4px 10px rgba(0,0,0,.45); }
+.coach--univ { background: linear-gradient(180deg, #0A0F3A, #060B30); }
+.coach h4 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 19px; text-transform: uppercase; letter-spacing: .02em; }
+.shield { position: relative; width: 168px; aspect-ratio: 168 / 186; padding: 4px; background: var(--metal);
+  clip-path: polygon(0 0, 100% 0, 100% 74%, 50% 100%, 0 74%); }
+.shield__face { height: 100%; background: var(--streak), linear-gradient(165deg, #1E3550, #0B1A27 70%);
+  clip-path: polygon(0 0, 100% 0, 100% 74%, 50% 100%, 0 74%); display: flex; flex-direction: column; align-items: center; padding-top: 12px; }
+.shield__name { font-family: var(--display); font-weight: 800; font-size: 20px; text-transform: uppercase; color: var(--gd-num); }
+.shield__row { display: flex; align-items: flex-end; gap: 8px; margin-top: 2px; }
+.shield__row svg { width: 64px; height: 64px; }
+.shield__num { line-height: .86; text-align: right; color: var(--gd-num); }
+.shield__num span { display: block; font-family: var(--display); font-weight: 700; font-size: 14px; }
+.shield__num b { font-family: var(--display); font-weight: 800; font-size: 40px; font-variant-numeric: tabular-nums; }
+
+/* progress — neon green on navy */
+.prog { width: 150px; height: 18px; border-radius: 5px; background: #001A2E; position: relative; overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); display: grid; place-items: center; }
+.prog i { position: absolute; inset: 0 auto 0 0; width: var(--p, 20%); background: linear-gradient(180deg, #7DFF94, var(--gr-neon) 45%, #00C92A); }
+.prog b { position: relative; font-family: var(--ui); font-weight: 700; font-size: 12px; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.9); }
+.shield .prog { margin-top: 6px; width: 120px; }
+
+/* --- squad table: data goes light --- */
+.squad { min-width: 620px; background: var(--paper); border-radius: 6px; overflow: hidden; color: var(--paper-ink); font-family: var(--ui); }
+.squad__head, .squad__row { display: grid; grid-template-columns: 54px 1fr 40px 46px 46px 46px 46px 46px 120px; align-items: center; }
+.squad__head { background: var(--sk-body); color: #fff; font-weight: 700; font-size: 14px; height: 38px; }
+.squad__head span:nth-child(n+3) { text-align: center; }
+.squad__row { height: 50px; border-bottom: 1px solid var(--paper-line); font-size: 15px; }
+.squad__row:last-child { border-bottom: 0; }
+.squad__row.is-star { background: var(--paper-star); }
+.squad__row > span:nth-child(n+3) { text-align: center; color: var(--paper-dim); font-variant-numeric: tabular-nums; }
+.squad__row > span.main { color: var(--paper-ink); font-weight: 700; }
+.squad__name { font-weight: 700; display: flex; align-items: center; gap: 10px; }
+.shirt { width: 30px; height: 30px; margin-left: 12px; }
+.star { width: 20px; height: 22px; background: var(--amber-2); clip-path: polygon(0 0, 100% 0, 100% 60%, 50% 100%, 0 60%); display: inline-block; }
+.bars { display: flex; gap: 5px; padding-right: 12px; }
+.bars i { flex: 1; height: 10px; border-radius: 2px; background: linear-gradient(180deg, #89EE58, var(--gr-bar)); }
+.bars i.low { background: linear-gradient(180deg, #F7D36A, var(--amber-2)); }
+
+/* --- next match panel --- */
+.vs { min-width: 640px; border-radius: 8px; overflow: hidden; position: relative;
+  box-shadow: 0 0 0 2px #0F3B59, 0 0 0 3px rgba(3,116,183,.6), 0 6px 14px rgba(0,0,0,.5); }
+.vs__main { background: linear-gradient(180deg, #134B84 0%, #285D7D 100%); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 18px; padding: 30px 22px 22px; }
+.vs__notch { position: absolute; left: 50%; top: 0; transform: translateX(-50%); }
+.vs__team { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 800; font-size: 28px; text-transform: uppercase; letter-spacing: .01em; min-width: 0; }
+.vs__team--r { justify-content: flex-end; text-align: right; }
+.crest { width: 46px; height: 46px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 2px rgba(255,255,255,.55); background: rgba(255,255,255,.08); }
+.vs__mid { display: flex; align-items: center; gap: 14px; }
+.vsword { font-family: var(--display); font-weight: 800; font-style: italic; font-size: 52px; line-height: 1;
+  background: linear-gradient(180deg, var(--vs-1) 15%, var(--vs-2) 70%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 2px 0 #3B2B07); padding-right: 4px; }
+.vs__strip { background: var(--abyss); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 18px; font-family: var(--ui); font-weight: 700; font-size: 14px; }
+.form { display: flex; gap: 6px; }
+.form i { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 11px; font-weight: 700; color: rgba(255,255,255,.75); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22); }
+.form .w { background: var(--gr-chip); }
+.form .d { background: var(--amber); }
+.form .l { background: #7E1A1A; }
+
+/* --- tactic card --- */
+.tac { width: 300px; flex: none; background: var(--card); border-radius: 8px 8px 6px 6px; padding: 16px 18px 14px; text-align: center;
+  box-shadow: inset 0 2px 0 #69B1C5, 0 4px 10px rgba(0,0,0,.45); }
+.tac__label { display: inline-flex; align-items: center; gap: 8px; color: var(--label); font-family: var(--ui); font-weight: 700; font-size: 17px; }
+.help { width: 24px; height: 24px; border-radius: 50%; background: radial-gradient(circle at 40% 30%, #A8E8FA, var(--sk-rim) 55%, #0299D2);
+  display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; }
+.tac__val { margin: 4px 0 10px; font-family: var(--ui); font-weight: 700; font-size: 22px; color: #fff; }
+.tac__pitch { height: 92px; border-radius: 4px; position: relative; overflow: hidden;
+  background: repeating-linear-gradient(90deg, #2F8C1E 0 26px, #2A8019 26px 52px); box-shadow: inset 0 0 0 2px rgba(255,255,255,.6); }
+.tac__pitch::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,.6); }
+.tac__pitch::after { content: ""; position: absolute; left: 50%; top: 50%; width: 34px; height: 34px; border-radius: 50%; transform: translate(-50%,-50%); box-shadow: inset 0 0 0 2px rgba(255,255,255,.6); }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; height: 92px; align-items: end; }
+.steps i { font-style: normal; font-family: var(--display); font-weight: 700; font-size: 13px; color: var(--ink-3);
+  border-radius: 4px 4px 0 0; padding-top: 6px; background: linear-gradient(180deg, #0B3556, #04243F); }
+.steps i:nth-child(1) { height: 40%; } .steps i:nth-child(2) { height: 58%; } .steps i:nth-child(3) { height: 78%; } .steps i:nth-child(4) { height: 100%; }
+.steps i.on { color: #fff; background: linear-gradient(180deg, var(--sk-rim), var(--sk-body)); }
+.dots { display: flex; gap: 9px; justify-content: center; margin-top: 12px; }
+.dots i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.3); }
+.dots i.on { background: #fff; }
+
+/* --- match timeline --- */
+.tl { display: grid; grid-template-columns: 1fr 70px 1fr; gap: 10px 14px; align-items: center; min-width: 600px; }
+.minute { justify-self: center; width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--deep); box-shadow: 0 0 0 3px #009BFC, 0 0 10px rgba(0,155,252,.45);
+  font-family: var(--display); font-weight: 800; font-size: 22px; }
+.ev { height: 56px; border-radius: 30px; background: var(--event); display: flex; align-items: center; gap: 12px; padding: 0 20px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08); font-family: var(--ui); font-weight: 700; font-size: 16px; min-width: 0; }
+.ev--l { justify-content: flex-end; }
+.goalword { font-family: var(--display); font-weight: 800; font-style: italic; font-size: 40px; line-height: 1; letter-spacing: .02em;
+  background: linear-gradient(180deg, #1396E3 10%, #10507A 85%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 0 1px #083151) drop-shadow(0 2px 0 #081829); }
+.x { color: var(--missed); font-size: 26px; font-weight: 800; line-height: 1; }
+.sub { display: flex; flex-direction: column; line-height: 1.05; }
+.sub b { font-family: var(--display); font-weight: 800; font-size: 19px; text-transform: uppercase; }
+.sub small { font-weight: 700; font-size: 12px; color: var(--sk-peak); }
+.arrows { display: flex; flex-direction: column; gap: 2px; }
+.arrows i { width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; }
+.arrows .up { border-bottom: 10px solid var(--gr-bar); }
+.arrows .dn { border-top: 10px solid var(--arrow); }
+
+/* --- division shield --- */
+.div { width: 150px; flex: none; display: grid; justify-items: center; gap: 10px; }
+.div__shield { width: 120px; aspect-ratio: 120 / 138; display: grid; place-items: center; padding-bottom: 18px;
+  background: linear-gradient(170deg, #EDEDED 0%, #BDBCBC 30%, #727D8C 62%, #595959 100%);
+  clip-path: polygon(10% 0, 90% 0, 100% 10%, 100% 66%, 50% 100%, 0 66%, 0 10%);
+  font-family: var(--display); font-weight: 800; font-size: 60px; color: #fff; text-shadow: 0 2px 3px rgba(0,0,0,.6); }
+.div__ribbon { margin-top: -42px; background: linear-gradient(180deg, #A6AEB8, #6E7782); color: #fff; font-family: var(--ui); font-weight: 700; font-size: 15px;
+  padding: 3px 26px; border-radius: 3px; box-shadow: 0 2px 3px rgba(0,0,0,.5); position: relative; }
+.div .prog { width: 150px; height: 12px; }
+.div .prog i { background: linear-gradient(180deg, #33FF00, #1DF200 40%, #0ED305); }
+
+/* --- the web welcome panel, computed styles --- */
+.welcome { max-width: 560px; background: rgba(0,0,0,.45); border-radius: 15px; padding: 18px 24px 20px;
+  box-shadow: inset 0 5px 5px -5px rgba(0,0,0,.9), inset 5px 0 2px -5px rgba(47,109,146,.9), inset -5px 0 2px -5px rgba(47,109,146,.9);
+  font-family: var(--display); font-weight: 300; font-size: 18px; }
+.welcome h4 { margin: 0 0 6px; font-family: var(--display); font-weight: 500; font-size: 21px; }
+.welcome p { margin: 0 0 8px; }
+.welcome a { color: var(--link); font-weight: 500; text-decoration: none; }
+.welcome__links { display: flex; justify-content: space-around; gap: 14px; flex-wrap: wrap; }
+
+/* ============================================================
+   CHALK — the half that is ours
+   ============================================================ */
+.lockup { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 26px; }
+.lockup svg { width: 78px; height: 68px; flex: none; }
+.wordmark { font-family: var(--mark); font-size: 46px; line-height: 1; letter-spacing: .02em; text-transform: uppercase;
+  border-bottom: 5px solid var(--pen); padding-bottom: 6px; }
+.wordmark i { font-style: normal; color: var(--ink-3); }
+
+.board { background: var(--board); border: 2px solid var(--board-rim); border-radius: 9px; overflow: hidden; }
+.board svg { display: block; width: 100%; height: auto; }
+figure.chalkfig { margin: 0; max-width: 440px; }
+figure.chalkfig figcaption { margin-top: 10px; font-size: 14px; color: var(--ink-3); }
+.vocab { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 12px; }
+.vocab figure { margin: 0; }
+.vocab figcaption { margin-top: 8px; font-family: var(--display); font-weight: 700; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.vocab b { display: block; color: var(--ink-2); font-family: var(--ui); font-weight: 500; font-size: 13px; letter-spacing: 0; text-transform: none; margin-top: 2px; }
+.emptydemo { background: var(--abyss); border-radius: 8px; padding: 46px 20px; text-align: center; }
+.emptydemo .board { max-width: 240px; margin: 0 auto 22px; }
+.emptydemo h4 { margin: 0 0 8px; font-family: var(--display); font-weight: 800; font-size: 26px; text-transform: uppercase; }
+.emptydemo p { margin: 0 auto; max-width: 46ch; color: var(--ink-2); font-size: 14.5px; }
+.nope { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 3px; }
+.nope div { background: var(--abyss); border-radius: 4px; padding: 15px 17px; }
+.nope b { display: block; font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: .06em; text-transform: uppercase; color: var(--or-peak); margin-bottom: 4px; }
+.nope span { color: var(--ink-2); font-size: 14px; }
+
+/* rules */
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 3px; }
+.rule { background: var(--abyss); border-radius: 4px; padding: 18px 20px 20px; }
+.rule h4 { margin: 0 0 8px; font-family: var(--display); font-weight: 800; font-size: 19px; letter-spacing: .04em; text-transform: uppercase; color: var(--label); }
+.rule p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+.rule.is-gold h4 { color: var(--gd-mid); }
+.rule.is-green h4 { color: var(--gr-bar); }
+.rule.is-yellow h4 { color: var(--select); }
+.rule.is-orange h4 { color: var(--or-body); }
+.rule.is-chalk h4 { color: var(--chalk); }
+
+ul.clean { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; max-width: 74ch; }
+ul.clean li { padding-left: 20px; position: relative; color: var(--ink-2); }
+ul.clean li::before { content: "▸"; position: absolute; left: 0; top: 0; color: var(--or-body); }
+ul.clean li b { color: var(--ink); }
+ul.clean.no li::before { content: "✕"; color: var(--ink-4); font-size: 12px; top: 2px; }
+
+footer { margin-top: 64px; background: var(--abyss); padding-block: 26px 44px; font-size: 14px; color: var(--ink-3); }
+footer::before { content: ""; display: block; height: 3px; background: var(--hairline); margin-top: -26px; margin-bottom: 26px; }
+footer b { color: var(--ink-2); }
+
+@media (max-width: 720px) {
+  .topbar__brand { display: none; }
+  .stage { padding: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+</style>
+
+<header class="topbar">
+  <div class="wrap topbar__in">
+    <span class="topbar__brand"><i>OSM</i>WIZ</span>
+    <nav aria-label="Sections">
+      <a href="#identity" class="is-active">Identity</a>
+      <a href="#foundation">Foundation</a>
+      <a href="#colour">Colour</a>
+      <a href="#type">Type</a>
+      <a href="#texture">Texture</a>
+      <a href="#components">Components</a>
+      <a href="#chalk">Chalk</a>
+      <a href="#rules">Rules</a>
+      <a href="#apply">Apply</a>
+      <a href="#limits">Limits</a>
+      <a href="#evidence">Evidence</a>
+    </nav>
+  </div>
+</header>
+
+<div class="masthead">
+  <div class="wrap masthead__body">
+    <span class="notch">Visual System</span>
+    <h1>Navy is theirs.<br>Chalk is <em>ours</em>.</h1>
+    <p class="lede">The visual system for OSMWiz, a companion to Online&nbsp;Soccer&nbsp;Manager&nbsp;26/27.
+      Everything that shows the game's data was measured: pixel-sampled from the official store art at native
+      resolution, and read from the live web client's computed styles and public stylesheet. Gamebasics publishes
+      no style guide, so no value here was chosen by taste. The identity, and the chalk it is drawn in, are ours.</p>
+    <ul class="stats">
+      <li><b>41</b>Images</li>
+      <li><b>110</b>Regions sampled</li>
+      <li><b>1</b>Live web client</li>
+      <li><b>8</b>Colour ramps</li>
+      <li><b>5</b>Texture layers</li>
+      <li><b>5</b>Chalk marks</li>
+      <li><b>0</b>Image assets</li>
+    </ul>
+  </div>
+</div>
+
+<main>
+
+<!-- ============ IDENTITY ============ -->
+<section id="identity">
+  <div class="sec-head"><div class="wrap sec-head__in"><h2>Identity</h2><p>The name splits in two, and so does the design</p></div></div>
+  <div class="wrap sec-body">
+    <div class="lockup">
+      <svg viewBox="0 0 100 88" role="img" aria-label="OSMWiz mark">
+        <rect x="2" y="2" width="96" height="84" rx="6" fill="#0D1410" stroke="#2C3A30" stroke-width="2"/>
+        <path d="M20 26 L33 62 L48 38" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <path d="M48 38 L62 62 L73 34" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="12 7"/>
+        <circle cx="20" cy="26" r="6" fill="#0D1410" stroke="#E8F3EA" stroke-width="4"/>
+        <polygon points="78.5,19 81,29.5 70,25.6" fill="#FC8C21"/>
+      </svg>
+      <span class="wordmark"><i>OSM</i>WIZ</span>
+    </div>
+
+    <p class="lede"><strong>OSMWiz</strong> is the working name. It follows the <code>&lt;game&gt;WIZ</code> pattern
+      of FHCWiz, so the two read as one family. The name splits in two and so does the design:</p>
+    <ul class="clean">
+      <li><b>OSM is the game's world.</b> Anything that shows the game's own data (cards, ratings, squads, fixtures,
+        tactics, money) is drawn in the measured system in Foundation through Components.</li>
+      <li><b>WIZ is ours.</b> Anything that is our analysis rather than their data (this mark, counter-tactic
+        reasoning, editorial diagrams, teaching material) is drawn in chalk.</li>
+    </ul>
+    <div class="note"><p>One rule settles which: <strong>their data wears navy and gold, our thinking wears chalk.</strong></p></div>
+
+    <h3>The mark</h3>
+    <p>A W drawn as a move on a tactics board. An O where it starts, two passes already played (solid), a run still to
+      happen (dashed), and an orange arrowhead where it ends. It shares the chalk method with FHCWiz but tells a football
+      story: pass, pass, run. It borrows nothing from the game, so it survives intact if the acronym ever has to go.</p>
+
+    <h3>The wordmark</h3>
+    <p><strong>OSMWIZ</strong> in Anton, one line, with an orange rule beneath the full width. OSM sits in
+      <code>#899AA7</code>; WIZ sits in <code>#FFFFFF</code>. The acronym names the subject and the half that is lit is
+      ours. That is the trademark position made visible, and it is why Limits permits the acronym at all.</p>
+    <ul class="clean no">
+      <li>Never set OSM alone, in any face, at any size.</li>
+      <li>Never set OSMWIZ in one flat colour; the halves always differ in value.</li>
+      <li>The orange rule belongs to the wordmark. It is not a divider to reuse.</li>
+      <li>Never set the wordmark in Saira Condensed. Saira is the game's typeface; Anton is the family's.</li>
+    </ul>
+
+    <div class="note"><p><strong>Naming risk.</strong> "OSM" is also the universal shorthand for OpenStreetMap, and most
+      store results for "OSM" are map apps. Store listings and page titles should always carry
+      "Online Soccer Manager" in full beside OSMWiz.</p></div>
+  </div>
+</section>
+
+<!-- ============ FOUNDATION ============ -->
+<section id="foundation">
+  <div class="sec-head"><div class="wrap sec-head__in"><h2>Foundation</h2><p>The ground everything sits on</p></div></div>
+  <div class="wrap sec-body">
+    <p class="lede">OSM's dark is <strong>navy, never black</strong>. Every ground measured on every screen carries a
+      blue hue between 205° and 215° at high saturation. Where FHC uses texture to stop black looking flat, OSM uses hue,
+      and its surfaces are smooth. There is no grain anywhere in the game.</p>
+
+    <h3>Ground ramp</h3>
+    <div class="grounds">
+      <div style="background:#020D17"><code>#020D17</code><span>Abyss · strips, tabs</span></div>
+      <div style="background:#0A1A2D"><code>#0A1A2D</code><span>Deep · scoreboard</span></div>
+      <div style="background:#001C31"><code>#001C31</code><span>Pill · formation</span></div>
+      <div style="background:#002037"><code>#002037</code><span>Card · tactics</span></div>
+      <div style="background:#022B4D"><code>#022B4D</code><span>Bar · top bar</span></div>
+      <div style="background:#07243F"><code>#07243F</code><span>Event · timeline</span></div>
+      <div style="background:#0B4169"><code>#0B4169</code><span>Rail · bench</span></div>
+    </div>
+
+    <h3>Backdrop</h3>
+    <p>Panels never sit on navy. They sit on <strong>royal</strong>, a saturated blue measured at <code>#022F6D</code> on
+      Upgrade and <code>#00165D</code> on Strategy. It carries faint marble veins and floodlight glow, or a stadium photo
+      behind the line-up. The game's grammar is <strong>navy panels on royal ground</strong>; this page follows it by staging
+      every component on royal.</p>
+
+    <h3>Elevation, the OSM way</h3>
+    <p>Light comes from the top. A raised panel has a lighter rim along its top edge (measured <code>#69B1C5</code> on
+      tactic cards and <code>#0374B7</code> around the match panel). A raised button has a white gloss band over its top
+      half and a dark bevel along its bottom. Nothing is lit from below, and there is no drop-shadow ladder.</p>
+
+    <h3>Data goes light</h3>
+    <p>The one place OSM leaves the dark: <strong>the squad table is white paper</strong>. Rows are <code>#FFFFFF</code>,
+      the star player's row is <code>#FFF8E5</code>, and the section header is sky blue <code>#0096E3</code>. Dense data
+      reads as a printed team sheet laid on the navy chrome, which is the opposite of FHC's dark standings list.</p>
+
+    <div class="note"><p><strong>What changed in 26/27.</strong> The previous store art (OSM-170/191, still served in the
+      AR, ES and MX storefronts) drew line-ups as small blue mini-cards with fitness and morale bars. 26/27 replaced them
+      with gold-framed landscape cards and moved fitness into a toggle. Build to 26/27.</p></div>
+  </div>
+</section>
+
+<!-- ============ COLOUR ============ -->
+<section id="colour">
+  <div class="sec-head"><div class="wrap sec-head__in"><h2>Colour</h2><p>Eight ramps, each with one job</p></div></div>
+  <div class="wrap sec-body">
+    <p class="lede">Each ramp runs shadow → body → mid → rim → peak. Values are tagged by how they were obtained:
+      <span class="tag tag--v">Verified</span> read from the web client's computed styles or stylesheet,
+      <span class="tag tag--m">Measured</span> pixel-sampled from store art, <span class="tag tag--d">Derived</span>
+      interpolated where the game never shows the stop.</p>
+
+    <div class="ramp">
+      <div class="ramp__label"><span class="ramp__name" style="color:#5AC8FA">Navy</span><span class="ramp__role">Chrome and panels · <span class="tag tag--m">Measured</span></span></div>
+      <div class="ramp__bar">
+        <div class="sw d" style="background:#020D17"><code>#020D17</code><span>Abyss</span></div>
+        <div class="sw d" style="background:#0A1A2D"><code>#0A1A2D</code><span>Deep</span></div>
+        <div class="sw d" style="background:#002037"><code>#002037</code><span>Card</span></div>
+        <div class="sw d" style="background:#022B4D"><code>#022B4D</code><span>Bar</span></div>
+        <div class="sw d" style="background:#0B4169"><code>#0B4169</code><span>Rail</span></div>
+      </div>
+    </div>
+
+    <div class="ramp">
+      <div class="ramp__label"><span class="ramp__name" style="color:#2586D2">Royal</span><span class="ramp__role">Backdrop behind panels · <span class="tag tag--m">Measured</span> · <code>#154B96</code> <span class="tag tag--v">Verified</span></span></div>
+      <div class="ramp__bar">
+        <div class="sw d" style="background:#00145A"><code>#00145A</code><span>Deep</span></div>
+        <div class="sw d" style="background:#00165D"><code>#00165D</code><span>Strategy</span></div>
+        <div class="sw d" style="background:#022F6D"><code>#022F6D</code><span>Upgrade</span></div>
+        <div class="sw d" style="background:#154B96"><code>#154B96</code><span>Alt button</span></div>
+        <div class="sw d" style="background:#2586D2"><code>#2586D2</code><span>Sky edge</span></div>
+      </div>
+    </div>
+
+    <div class="ramp">
+      <div class="ramp__label"><span class="ramp__name" style="color:#00BBFE">Sky</span><span class="ramp__role">Information: table headers, links, help, labels · <span class="tag tag--v">Verified</span> + <span class="tag tag--m">Measured</span></span></div>
+      <div class="ramp__bar">
+        <div class="sw d" style="background:#005C7F"><code>#005C7F</code><span>Info strip</span></div>
+        <div class="sw d" style="background:#0096E3"><code>#0096E3</code><span>Table head</span></div>
+        <div class="sw d" style="background:#00A8FF"><code>#00A8FF</code><span>Web primary</span></div>
+        <div class="sw l" style="background:#00BBFE"><code>#00BBFE</code><span>Help</span></div>
+        <div class="sw l" style="background:#5AC8FA"><code>#5AC8FA</code><span>Link</span></div>
+      </div>
+    </div>
+
+    <div class="ramp">
+      <div class="ramp__label"><span class="ramp__name" style="color:#B3ECFF">Ice</span><span class="ramp__role">The app's in-card primary (Claim progression) · ink <code>#1E3459</code> · <span class="tag tag--m">Measured</span></span></div>
+      <div class="ramp__bar">
+        <div class="sw l" style="background:#6DB1E9"><code>#6DB1E9</code><span>Bevel</span></div>
+        <div class="sw l" style="background:#99D6FB"><code>#99D6FB</code><span>Body</span></div>
+        <div class="sw l" style="background:#B3ECFF"><code>#B3ECFF</code><span>Mid</span></div>
+        <div class="sw l" style="background:#D4FBFF"><code>#D4FBFF</code><span>Rim</span></div>
+        <div class="sw d" style="background:#1E3459"><code>#1E3459</code><span>Ink</span></div>
+      </div>
+    </div>
+
+    <div class="ramp">
+      <div class="ramp__label"><span class="ramp__name" style="color:#49B9C6">Ring</span><span class="ramp__role">Rating circles: team strength, the VS badge · <span class="tag tag--m">Measured</span></span></div>
+      <div class="ramp__bar">
+        <div class="sw d" style="background:#003248"><code>#003248</code><span>Deep</span></div>
+        <div class="sw d" style="background:#0A3E55"><code>#0A3E55</code><span>Body</span></div>
+        <div class="sw d" style="background:#1E89A0"><code>#1E89A0</code><span>Mid</span></div>
+        <div class="sw l" style="background:#49B9C6"><code>#49B9C6</code><span>Rim</span></div>
+        <div class="sw l" style="background:#5BCFD8"><code>#5BCFD8</code><span>Peak</span></div>
+      </div>
+    </div>
+
+    <div class="ramp">
+      <div class="ramp__label"><span class="ramp__name" style="color:#DFC091">Gold</span><span class="ramp__role">Prestige: card frames, the top-bar hairline, rating numerals, VS · <span class="tag tag--m">Measured</span></span></div>
+      <div class="ramp__bar">
+        <div class="sw d" style="background:#634F3F"><code>#634F3F</code><span>Shadow</span></div>
+        <div class="sw d" style="background:#A2855F"><code>#A2855F</code><span>Body</span></div>
+        <div class="sw l" style="background:#DFC091"><code>#DFC091</code><span>Mid</span></div>
+        <div class="sw l" style="background:#E4C197"><code>#E4C197</code><span>Numeral</span></div>
+        <div class="sw l" style="background:#F2E6CA"><code>#F2E6CA</code><span>Peak</span></div>
+      </div>
+    </div>
+
+    <div class="ramp">
+      <div class="ramp__label"><span class="ramp__name" style="color:#50F12E">Green</span><span class="ramp__role">Growth: training, fitness, division progress, wins · <span class="tag tag--v">Verified</span> + <span class="tag tag--m">Measured</span></span></div>
+      <div class="ramp__bar">
+        <div class="sw d" style="background:#0E3014"><code>#0E3014</code><span>Deep</span></div>
+        <div class="sw d" style="background:#19560F"><code>#19560F</code><span>W chip</span></div>
+        <div class="sw d" style="background:#16B800"><code>#16B800</code><span>Web success</span></div>
+        <div class="sw l" style="background:#50F12E"><code>#50F12E</code><span>Fitness</span></div>
+        <div class="sw l" style="background:#00FA33"><code>#00FA33</code><span>Training</span></div>
+      </div>
+    </div>
+
+    <div class="ramp">
+      <div class="ramp__label"><span class="ramp__name" style="color:#FC8C21">Orange</span><span class="ramp__role">Commit, and the brand's own colour · <span class="tag tag--v">Verified</span> + <span class="tag tag--m">Measured</span></span></div>
+      <div class="ramp__bar">
+        <div class="sw d" style="background:#E93323"><code>#E93323</code><span>Wordmark red</span></div>
+        <div class="sw d" style="background:#EC781E"><code>#EC781E</code><span>Hover</span></div>
+        <div class="sw l" style="background:#FC8C21"><code>#FC8C21</code><span>Accept</span></div>
+        <div class="sw l" style="background:#ED8537"><code>#ED8537</code><span>Wordmark</span></div>
+        <div class="sw l" style="background:#FEA153"><code>#FEA153</code><span>Peak</span></div>
+      </div>
+    </div>
+
+    <h3>Singles</h3>
+    <div class="singles">
+      <div class="single"><i style="background:#FFE800"></i><div><b>Select</b><code>#FFE800 · label on</code></div></div>
+      <div class="single"><i style="background:#B37608"></i><div><b>Draw</b><code>#B37608 · D chip</code></div></div>
+      <div class="single"><i style="background:#E5A523"></i><div><b>Star</b><code>#E5A523 · badge</code></div></div>
+      <div class="single"><i style="background:#D9534F"></i><div><b>Danger</b><code>#D9534F · web</code></div></div>
+      <div class="single"><i style="background:#FC3018"></i><div><b>Arrow</b><code>#FC3018 · sub out</code></div></div>
+      <div class="single"><i style="background:#00C7C8"></i><div><b>Missed</b><code>#00C7C8 · chance</code></div></div>
+      <div class="single"><i style="background:#B3B3B3"></i><div><b>Disabled</b><code>#B3B3B3 · web</code></div></div>
+      <div class="single"><i style="background:#235116"></i><div><b>Pitch</b><code>#235116 · grass</code></div></div>
+    </div>
+
+    <h3>Text</h3>
+    <div class="tblwrap"><table class="tbl">
+      <thead><tr><th>Role</th><th>Value</th><th>Where</th></tr></thead>
+      <tbody>
+        <tr><td>Primary</td><td><code>#FFFFFF</code></td><td>Values, names, titles on navy</td></tr>
+        <tr><td>Label</td><td><code>#66DEFF</code></td><td>The small line above a value: "Game plan", "Tackling", "Forwards"</td></tr>
+        <tr><td>Link</td><td><code>#5AC8FA</code></td><td>Web links, the "Privacy Policy" weight-500 style</td></tr>
+        <tr><td>Tab</td><td><code>#64BFDE</code></td><td>The notch tab hanging from a panel ("Next match")</td></tr>
+        <tr><td>Numeral</td><td><code>#E4C197</code></td><td>Ratings and positions on gold-framed cards</td></tr>
+        <tr><td>Muted</td><td><code>#899AA7</code></td><td>Secondary labels on navy</td></tr>
+        <tr><td>Paper ink</td><td><code>#121212</code> / <code>#828285</code></td><td>Squad table: names and the main stat bold; age, nationality and off-stats dim</td></tr>
+        <tr><td>Ice ink</td><td><code>#1E3459</code></td><td>Text on the ice button</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============ TYPE ============ -->
+<section id="type">
+  <div class="sec-head"><div class="wrap sec-head__in"><h2>Type</h2><p>Saira Condensed for weight, the system grotesk for everything else</p></div></div>
+  <div class="wrap sec-body">
+    <p class="lede">Unlike FHC's, OSM's typeface is identifiable. The live web client loads <strong>Saira Condensed</strong>
+      at 400, 500, 700 and 800 from Google Fonts, with Sofia Sans Condensed as its fallback <span class="tag tag--v">Verified</span>.
+      The app sets names and numbers in the same face at 800. It sets UI labels and table data in the platform's system
+      grotesk: Helvetica Neue on iOS, Roboto on Android <span class="tag tag--m">Measured</span>. Both are open, so the companion
+      can use the game's actual type.</p>
+
+    <div class="spec spec--display">
+      <div class="spec__meta"><b>Saira Condensed 800</b><span>Caps</span><span>Team names · coach titles · player names · buttons</span></div>
+      <p>Manchester City</p>
+    </div>
+    <div class="spec spec--num">
+      <div class="spec__meta"><b>Saira Condensed 800</b><span>Numerals in gold</span><span>Ratings on cards</span></div>
+      <p>93 &nbsp;89 &nbsp;86</p>
+    </div>
+    <div class="spec spec--ui">
+      <div class="spec__meta"><b>System grotesk</b><span>400 label / 700 value</span><span>Panels · tables · tactic values</span></div>
+      <p><span>Star player:</span> <b>Haaland</b> &nbsp;<span>Highest rating:</span> <b>7.6</b></p>
+    </div>
+    <div class="spec spec--web">
+      <div class="spec__meta"><b>Saira Condensed 300 / 500</b><span>Web body</span><span>The web client's running text</span></div>
+      <p><b>Welcome.</b> By playing our game, you confirm you accept our privacy policy and terms and conditions.</p>
+    </div>
+
+    <h3>Scale</h3>
+    <div class="tblwrap"><table class="tbl">
+      <thead><tr><th>Role</th><th>Face</th><th>Size</th><th>Treatment</th></tr></thead>
+      <tbody>
+        <tr><td>Display</td><td>Saira Condensed 800</td><td><code>40–76px</code></td><td>Caps, tight leading <code>.92</code></td></tr>
+        <tr><td>Team / title</td><td>Saira Condensed 800</td><td><code>26–36px</code></td><td>Caps</td></tr>
+        <tr><td>Card rating</td><td>Saira Condensed 800</td><td><code>34–44px</code></td><td>Gold numeral, position at 30% size above</td></tr>
+        <tr><td>Button</td><td>Saira Condensed 800</td><td><code>21px</code></td><td>Text shadow <code>0 1px 2px rgba(0,0,0,.7)</code>, the web value</td></tr>
+        <tr><td>Label</td><td>System grotesk 700</td><td><code>15–17px</code></td><td>Sentence case, sky <code>#66DEFF</code></td></tr>
+        <tr><td>Value</td><td>System grotesk 700</td><td><code>20–26px</code></td><td>Sentence case, white</td></tr>
+        <tr><td>Table</td><td>System grotesk 400 / 700</td><td><code>14–15px</code></td><td>Name and main stat bold; everything else dim</td></tr>
+        <tr><td>Web body</td><td>Saira Condensed 300</td><td><code>18px</code></td><td>The web client's computed size</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="note"><p><strong>Wordart is not type.</strong> "VS" and "GOAL" are drawn as italic 800 with metallic fills,
+      gold for VS and blue for GOAL. They appear exactly once per screen at the dramatic moment. Use them only in
+      match-day components, never as headings.</p></div>
+  </div>
+</section>
+
+<!-- ============ TEXTURE ============ -->
+<section id="texture">
+  <div class="sec-head"><div class="wrap sec-head__in"><h2>Texture</h2><p>Five layers, zero image files</p></div></div>
+  <div class="wrap sec-body">
+    <p class="lede">OSM is glossy and smooth, with no grain and no noise. Its texture is light: gloss, metal, marble, floodlight.
+      All five layers below are CSS gradients and one inline SVG, about 2KB in total.</p>
+
+    <h3>1 · Gloss band &nbsp;·&nbsp; bevel</h3>
+    <p>Lifted verbatim from the web client's <code>.btn-new</code>. The bevel is an inset bottom shadow plus an inset top
+      highlight: <code>inset 0 -4px 0 -2px rgba(0,0,0,.4), inset 0 4px 1px -2px rgba(255,255,255,.4)</code>. The gloss is
+      an <code>::after</code> covering the top half (inset 4px top, 8px sides) at 40% white, with an inner glow in the button's
+      own colour. Every raised control has both. See Components.</p>
+
+    <h3>2 · Gold hairline</h3>
+    <div class="tex" style="height:28px;background:var(--hairline)"></div>
+    <p>A 3px metal rule under the top bar. It is the most constant motif in the game, present on every screen with a top bar.
+      The same metal frames every gold card.</p>
+
+    <h3>3 · Marble veins</h3>
+    <div class="tex" style="background:var(--veins),linear-gradient(180deg,#022F6D,#00165D);background-size:640px 420px,auto"></div>
+    <p>Thin white veins across the royal backdrop, and solid white marble on card corners. Fractal noise is thresholded into
+      bands by one <code>feComponentTransfer</code>, so the veins come from a 600-byte data URI and no image.</p>
+
+    <h3>4 · Floodlights</h3>
+    <div class="tex" style="background:var(--flood)"></div>
+    <p>Two soft radial glows at the top corners over royal. They stand in for the game's stadium photography, which we do
+      not use.</p>
+
+    <h3>5 · Card streak</h3>
+    <div class="tex" style="background:var(--streak),linear-gradient(160deg,#1B2B3D,#0B1A27 70%)"></div>
+    <p>A diagonal amber light band across every default-theme card face. It marks a surface as a card at a glance.</p>
+  </div>
+</section>
+
+<!-- ============ COMPONENTS ============ -->
+<section id="components">
+  <div class="sec-head"><div class="wrap sec-head__in"><h2>Components</h2><p>Everything below is live CSS, not a screenshot</p></div></div>
+  <div class="wrap sec-body">
+
+    <h3>Top bar</h3>
+    <div class="stage">
+      <div class="gbar">
+        <div class="gbar__row">
+          <div class="gbar__tab"><div class="gbar__avatar"></div></div>
+          <div class="gbar__mid">
+            <div class="gpill"><span class="gpill__coin gpill__coin--cash">$</span><span class="gpill__val">200K</span></div>
+            <div class="gpill"><span class="gpill__coin gpill__coin--bc">BC</span><span class="gpill__val">150 +</span></div>
+            <div class="gbar__icons"><span></span><span></span><span></span></div>
+          </div>
+          <div class="gbar__tab gbar__tab--r"><div class="gbar__menu"><i></i><i></i><i></i></div></div>
+        </div>
+        <div class="gbar__hair"></div>
+      </div>
+    </div>
+    <p>Navy gradient <code>#022B4D → #011D30</code>. Light end-tabs <code>#E5EAFA → #BFC9DC</code> hold the manager and the
+      menu. Currency sits in sky pills <code>#ABE0FF → #5BBBFB</code> with navy numerals, and the gold hairline runs beneath.
+      Club funds and Boss Coins are always shown together, money left, premium right.</p>
+
+    <h3>Buttons: seven roles</h3>
+    <div class="stage">
+      <div class="row">
+        <div class="case"><button type="button" class="btn btn--orange"><span>Accept</span></button><small>Orange · commit</small></div>
+        <div class="case"><button type="button" class="ice">Claim progression</button><small>Ice · collect, in-card</small></div>
+        <div class="case"><button type="button" class="btn"><span>Search</span></button><small>Sky · default action</small></div>
+        <div class="case"><button type="button" class="btn btn--green"><span>Buy player</span></button><small>Green · gain</small></div>
+      </div>
+      <div class="row" style="margin-top:16px">
+        <div class="case"><button type="button" class="btn btn--navy"><span>Cancel</span></button><small>Navy · dismiss</small></div>
+        <div class="case"><button type="button" class="btn btn--alt"><span>Compare</span></button><small>Royal · alternative</small></div>
+        <div class="case"><button type="button" class="btn btn--red"><span>Release</span></button><small>Red · destructive</small></div>
+        <div class="case"><button type="button" class="btn btn--off" disabled><span>Buy player</span></button><small>Grey · disabled</small></div>
+      </div>
+    </div>
+    <p>Six roles come straight from the web client's <code>.btn-new</code> variants: default <code>#00A8FF</code>, orange
+      <code>#FC8C21</code>, success <code>#16B800</code>, dark-blue <code>#061C2B</code>, alternative-blue <code>#154B96</code>,
+      danger <code>#D9534F</code>. Disabled swaps the fill <em>and</em> the gloss glow to <code>#B3B3B3</code>, so nothing
+      fades with opacity. <span class="tag tag--v">Verified</span> The ice button is the app's own in-card primary.
+      <span class="tag tag--m">Measured</span></p>
+
+    <h3>Selection: the label lights</h3>
+    <div class="stage">
+      <div class="row">
+        <button type="button" class="sel is-on">4-3-3 A</button>
+        <button type="button" class="sel">4-3-3 B</button>
+        <button type="button" class="sel">4-4-2 A</button>
+        <button type="button" class="sel is-on">Zonal</button>
+        <button type="button" class="sel">Man-to-man</button>
+      </div>
+    </div>
+    <p>OSM marks a selected option by <strong>darkening the fill and turning the label yellow</strong>. The web client's
+      <code>.btn-selectable</code> goes from <code>#04335A</code> to <code>#062C4C</code> with its label at <code>#FFE800</code>.
+      There is no rim and no glow. This is the opposite of FHC, where the rim carries selection.</p>
+
+    <h3>Rating circles</h3>
+    <div class="stage">
+      <div class="row" style="align-items:center;gap:22px">
+        <div class="circ"><div><small>Team</small>89</div></div>
+        <div class="row" style="gap:12px">
+          <div class="circ circ--sm"><div><small>Kee</small>88</div></div>
+          <div class="circ circ--sm"><div><small>Def</small>87</div></div>
+          <div class="circ circ--sm"><div><small>Mid</small>89</div></div>
+          <div class="circ circ--sm"><div><small>Att</small>90</div></div>
+        </div>
+        <div class="row" style="gap:12px">
+          <div class="case"><div class="circ circ--sm t-blue">78</div><small>Blue</small></div>
+          <div class="case"><div class="circ circ--sm t-bronze">84</div><small>Bronze</small></div>
+          <div class="case"><div class="circ circ--sm t-silver">93</div><small>Silver</small></div>
+          <div class="case"><div class="circ circ--sm t-gold">101</div><small>Gold</small></div>
+        </div>
+      </div>
+    </div>
+    <p>The app draws team strength as a navy disc with a teal ring <code>#49B9C6</code>, white numeral and sky label. The web
+      client colours the same badge by tier, from its code: <strong>blue under 80, bronze 80+, silver 90+, gold 100+</strong>
+      <span class="tag tag--v">Verified</span>. Gold and silver ring values are measured from the game's metal. Bronze and blue
+      are <span class="tag tag--d">Derived</span>, because 26/27 never renders them.</p>
+
+    <h3>Line-up card and empty slot</h3>
+    <div class="stage">
+      <div class="pitch">
+        <div class="lcard"><div class="lcard__face">
+          <div class="lcard__who"><svg viewBox="0 0 84 72" aria-hidden="true"><circle cx="42" cy="26" r="15" fill="#2A3E57"/><path d="M8 72c3-18 17-28 34-28s31 10 34 28Z" fill="#2A3E57"/></svg></div>
+          <div class="lcard__num"><span>ST</span><b>93</b></div>
+        </div></div>
+        <div class="lcard"><div class="lcard__face">
+          <div class="lcard__who"><svg viewBox="0 0 84 72" aria-hidden="true"><circle cx="42" cy="26" r="15" fill="#2A3E57"/><path d="M8 72c3-18 17-28 34-28s31 10 34 28Z" fill="#2A3E57"/></svg></div>
+          <div class="lcard__num"><span>CAM</span><b>88</b></div>
+        </div></div>
+        <div class="lslot" role="img" aria-label="Empty slot"><i>+</i></div>
+      </div>
+    </div>
+    <p>A landscape card in a <strong>gold metal frame</strong> with marble corners, a navy face crossed by the streak, and the
+      rating set large in gold numerals <code>#E4C197</code> with the position above it. The portrait slot takes a plain
+      silhouette in place of the player photograph. An empty slot is a translucent navy plate <code>rgba(10,30,48,.82)</code>
+      with a <code>+</code> in a ringed disc, never a dashed outline.</p>
+
+    <h3>Card themes</h3>
+    <div class="stage">
+      <div class="pcards">
+        <div><div class="pcard th-navy"><div class="pcard__face"><div class="pcard__top"><span>ST</span><b>93</b></div><div class="pcard__who"><svg viewBox="0 0 84 60" aria-hidden="true"><circle cx="42" cy="20" r="13" fill="rgba(255,255,255,.18)"/><path d="M10 60c3-14 15-22 32-22s29 8 32 22Z" fill="rgba(255,255,255,.18)"/></svg></div><div class="pcard__name">Default</div></div></div><div class="pcard__cap">Navy · gold frame</div></div>
+        <div><div class="pcard th-black"><div class="pcard__face"><div class="pcard__top"><span>CM</span><b>89</b></div><div class="pcard__who"><svg viewBox="0 0 84 60" aria-hidden="true"><circle cx="42" cy="20" r="13" fill="rgba(255,255,255,.16)"/><path d="M10 60c3-14 15-22 32-22s29 8 32 22Z" fill="rgba(255,255,255,.16)"/></svg></div><div class="pcard__name">Black</div></div></div><div class="pcard__cap">Black · gold frame</div></div>
+        <div><div class="pcard th-emerald"><div class="pcard__face"><div class="pcard__top"><span>CB</span><b>85</b></div><div class="pcard__who"><svg viewBox="0 0 84 60" aria-hidden="true"><circle cx="42" cy="20" r="13" fill="rgba(255,255,255,.2)"/><path d="M10 60c3-14 15-22 32-22s29 8 32 22Z" fill="rgba(255,255,255,.2)"/></svg></div><div class="pcard__name">Emerald</div></div></div><div class="pcard__cap">Emerald</div></div>
+        <div><div class="pcard th-violet"><div class="pcard__face"><div class="pcard__top"><span>GK</span><b>89</b></div><div class="pcard__who"><svg viewBox="0 0 84 60" aria-hidden="true"><circle cx="42" cy="20" r="13" fill="rgba(255,255,255,.22)"/><path d="M10 60c3-14 15-22 32-22s29 8 32 22Z" fill="rgba(255,255,255,.22)"/></svg></div><div class="pcard__name">Violet</div></div></div><div class="pcard__cap">Violet</div></div>
+        <div><div class="pcard th-indigo"><div class="pcard__face"><div class="pcard__top"><span>LB</span><b>85</b></div><div class="pcard__who"><svg viewBox="0 0 84 60" aria-hidden="true"><circle cx="42" cy="20" r="13" fill="rgba(255,255,255,.2)"/><path d="M10 60c3-14 15-22 32-22s29 8 32 22Z" fill="rgba(255,255,255,.2)"/></svg></div><div class="pcard__name">Indigo</div></div></div><div class="pcard__cap">Indigo</div></div>
+        <div><div class="pcard th-teal"><div class="pcard__face"><div class="pcard__top"><span>ST</span><b>76</b></div><div class="pcard__who"><svg viewBox="0 0 84 60" aria-hidden="true"><circle cx="42" cy="20" r="13" fill="rgba(255,255,255,.22)"/><path d="M10 60c3-14 15-22 32-22s29 8 32 22Z" fill="rgba(255,255,255,.22)"/></svg></div><div class="pcard__name">Teal</div></div></div><div class="pcard__cap">Teal</div></div>
+        <div><div class="pcard th-orange"><div class="pcard__face"><div class="pcard__top"><span>ST</span><b>82</b></div><div class="pcard__who"><svg viewBox="0 0 84 60" aria-hidden="true"><circle cx="42" cy="20" r="13" fill="rgba(255,255,255,.22)"/><path d="M10 60c3-14 15-22 32-22s29 8 32 22Z" fill="rgba(255,255,255,.22)"/></svg></div><div class="pcard__name">Orange</div></div></div><div class="pcard__cap">Orange</div></div>
+        <div><div class="pcard th-gold"><div class="pcard__face"><div class="pcard__top"><span>ST</span><b>80</b></div><div class="pcard__who"><svg viewBox="0 0 84 60" aria-hidden="true"><circle cx="42" cy="20" r="13" fill="rgba(0,0,0,.14)"/><path d="M10 60c3-14 15-22 32-22s29 8 32 22Z" fill="rgba(0,0,0,.14)"/></svg></div><div class="pcard__name">Gold</div></div></div><div class="pcard__cap">Gold · dark numerals</div></div>
+        <div><div class="pcard th-royal"><div class="pcard__face"><div class="pcard__top"><span>LW</span><b>92</b></div><div class="pcard__who"><svg viewBox="0 0 84 60" aria-hidden="true"><circle cx="42" cy="20" r="13" fill="rgba(255,255,255,.22)"/><path d="M10 60c3-14 15-22 32-22s29 8 32 22Z" fill="rgba(255,255,255,.22)"/></svg></div><div class="pcard__name">Royal</div></div></div><div class="pcard__cap">Royal</div></div>
+      </div>
+    </div>
+    <p><strong>A card's colour is a theme, not a tier.</strong> The web client paints every card from a per-theme image
+      (<code>--theme-image-url</code>, default <code>lineupcard_default.png</code>) <span class="tag tag--v">Verified</span>. The
+      26/27 art shows at least nine themes, unrelated to rating: an 80 can be gold and a 93 can be navy.
+      <span class="tag tag--m">Measured</span> A companion should store theme as data on the card, never compute it from OVR.
+      Numerals are white on coloured themes, gold on navy and black, and dark on gold. Rarity is a separate field in the
+      game's data: Default, Legend, In Form, Evolution, World Star.</p>
+
+    <h3>Coach card · progress · claim</h3>
+    <div class="stage">
+      <div class="row">
+        <div class="coach coach--univ">
+          <h4>Universal coach</h4>
+          <div class="shield"><div class="shield__face">
+            <div class="shield__name">Vinicius Jr.</div>
+            <div class="shield__row"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="22" r="12" fill="#2A3E57"/><path d="M8 64c2-14 12-22 24-22s22 8 24 22Z" fill="#2A3E57"/></svg><div class="shield__num"><span>LW</span><b>93</b></div></div>
+            <div class="prog" style="--p:20%"><i></i><b>20%</b></div>
+          </div></div>
+          <button type="button" class="ice">Claim progression</button>
+        </div>
+        <div class="coach">
+          <h4>Midfielder coach</h4>
+          <div class="shield"><div class="shield__face">
+            <div class="shield__name">Bellingham</div>
+            <div class="shield__row"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="22" r="12" fill="#2A3E57"/><path d="M8 64c2-14 12-22 24-22s22 8 24 22Z" fill="#2A3E57"/></svg><div class="shield__num"><span>CAM</span><b>88</b></div></div>
+            <div class="prog" style="--p:8%"><i></i><b>8%</b></div>
+          </div></div>
+          <button type="button" class="ice">Claim progression</button>
+        </div>
+      </div>
+    </div>
+    <p>Navy panel <code>#021E35 → #02192C</code>, with the paid Universal coach in deep indigo <code>#060B30</code>. The player
+      sits in a gold shield. Training fills a neon bar <code>#00FA33</code> on <code>#001A2E</code> with the percentage centred
+      on top. The ice button collects it.</p>
+
+    <h3>Squad table: data goes light</h3>
+    <div class="stage">
+      <div class="squad" role="table" aria-label="Squad example">
+        <div class="squad__head" role="row"><span></span><span>Forward</span><span>Age</span><span>Nat</span><span>Pos</span><span>Att</span><span>Def</span><span>Ovr</span><span>Fit &nbsp;·&nbsp; Mor</span></div>
+        <div class="squad__row is-star" role="row">
+          <svg class="shirt" viewBox="0 0 30 30" aria-hidden="true"><path d="M9 3l-7 5 3 6 3-2v15h14V12l3 2 3-6-7-5c-1 3-3 4-6 4s-5-1-6-4Z" fill="#2A4B99"/><text x="15" y="21" text-anchor="middle" font-family="Helvetica, Arial" font-weight="700" font-size="9" fill="#fff">9</text></svg>
+          <span class="squad__name">Haaland <i class="star" aria-label="Star player"></i></span><span>24</span><span>NOR</span><span>ST</span><span class="main">95</span><span>18</span><span>56</span><span class="bars"><i></i><i></i></span>
+        </div>
+        <div class="squad__row" role="row">
+          <svg class="shirt" viewBox="0 0 30 30" aria-hidden="true"><path d="M9 3l-7 5 3 6 3-2v15h14V12l3 2 3-6-7-5c-1 3-3 4-6 4s-5-1-6-4Z" fill="#B7BBBE"/><text x="15" y="21" text-anchor="middle" font-family="Helvetica, Arial" font-weight="700" font-size="9" fill="#fff">47</text></svg>
+          <span class="squad__name">Foden</span><span>24</span><span>ENG</span><span>RW</span><span class="main">90</span><span>41</span><span>65</span><span class="bars"><i></i><i></i></span>
+        </div>
+        <div class="squad__row" role="row">
+          <svg class="shirt" viewBox="0 0 30 30" aria-hidden="true"><path d="M9 3l-7 5 3 6 3-2v15h14V12l3 2 3-6-7-5c-1 3-3 4-6 4s-5-1-6-4Z" fill="#2A4B99"/><text x="15" y="21" text-anchor="middle" font-family="Helvetica, Arial" font-weight="700" font-size="9" fill="#fff">11</text></svg>
+          <span class="squad__name">Doku</span><span>22</span><span>BEL</span><span>LW</span><span class="main">84</span><span>39</span><span>61</span><span class="bars"><i></i><i class="low"></i></span>
+        </div>
+      </div>
+    </div>
+    <p>White rows, a sky header <code>#0096E3</code> with white sentence-case labels, and a cream row <code>#FFF8E5</code>
+      for the star player. The <strong>line's main stat is bold</strong>: Att for forwards, Ovr for midfielders, Def for
+      defenders and keepers. That follows the game's own rule for which stat counts. Everything else is dim
+      <code>#828285</code>. Fitness and morale are short green bars. The amber fill on Doku is <span class="tag tag--d">Derived</span>;
+      the art only shows full bars.</p>
+
+    <h3>Next match</h3>
+    <div class="stage">
+      <div class="vs">
+        <span class="notch vs__notch">Next match</span>
+        <div class="vs__main">
+          <div class="vs__team"><span class="crest" aria-hidden="true"></span>Manchester City</div>
+          <div class="vs__mid"><div class="circ">89</div><span class="vsword">VS</span><div class="circ">89</div></div>
+          <div class="vs__team vs__team--r">Real Madrid<span class="crest" aria-hidden="true"></span></div>
+        </div>
+        <div class="vs__strip">
+          <div class="form"><i class="w">W</i><i class="w">W</i><i class="d">D</i></div>
+          <span>Referee · Average</span>
+          <span>4-3-3-B</span>
+          <div class="form"><i class="w">W</i><i class="d">D</i><i class="l">L</i></div>
+        </div>
+      </div>
+    </div>
+    <p>Steel gradient <code>#134B84 → #285D7D</code> with a blue rim, team names in Saira 800 caps, and gold VS wordart
+      between two rating circles. A notch tab <code>#020E18</code> hangs from the top edge. The strip below holds form chips
+      (W <code>#19560F</code>, D <code>#B37608</code>), the referee and the formation. Crests are empty discs here, because
+      crests are licensed. The L chip colour is <span class="tag tag--d">Derived</span>.</p>
+
+    <h3>Tactic card</h3>
+    <div class="stage">
+      <div class="row">
+        <div class="tac">
+          <div class="tac__label">Game plan <span class="help" aria-hidden="true">?</span></div>
+          <div class="tac__val">Passing game</div>
+          <div class="tac__pitch" aria-hidden="true"></div>
+          <div class="dots" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="tac">
+          <div class="tac__label">Tackling <span class="help" aria-hidden="true">?</span></div>
+          <div class="tac__val">Normal</div>
+          <div class="steps" aria-hidden="true"><i>Careful</i><i class="on">Normal</i><i>Aggressive</i><i>Reckless</i></div>
+          <div class="dots" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+    </div>
+    <p>Card <code>#002037</code> with a sky top rim, then the game's two-line pattern: <strong>sky label, white value</strong>,
+      with a help disc <code>#00BBFE</code> beside the label. Paging dots show which option of the set is active: 5 game plans,
+      4 tackling levels.</p>
+
+    <h3>Match timeline</h3>
+    <div class="stage">
+      <div class="tl">
+        <div class="ev ev--l"><span class="goalword">GOAL</span><b>Mbappé</b></div><div class="minute">64’</div><div></div>
+        <div></div><div class="minute">40’</div><div class="ev"><b>Haaland</b><span class="goalword">GOAL</span></div>
+        <div class="ev ev--l"><b>Missed chance</b><span class="x" aria-label="missed">✕</span></div><div class="minute">39’</div><div></div>
+        <div></div><div class="minute">30’</div><div class="ev"><span class="arrows" aria-hidden="true"><i class="up"></i><i class="dn"></i></span><span class="sub"><b>In: 16 Foden</b><small>Out: 8 Kovačić</small></span></div>
+      </div>
+    </div>
+    <p>A centre spine of minute bubbles, deep navy with a <code>#009BFC</code> ring. Home events hang left and away events
+      right, on rounded event pills <code>#07243F</code>. Goals get the blue wordart. A missed chance is a teal cross
+      <code>#00C7C8</code>. A substitution stacks a green up-arrow over a red down-arrow.</p>
+
+    <h3>Division · web dialog</h3>
+    <div class="stage">
+      <div class="row" style="align-items:center;gap:30px">
+        <div class="div">
+          <div class="div__shield">9</div>
+          <div class="div__ribbon">Boss</div>
+          <div class="prog" style="--p:72%"><i></i></div>
+        </div>
+        <div class="welcome">
+          <h4>Welcome</h4>
+          <p>By playing our game, you confirm you accept our privacy policy and terms and conditions.</p>
+          <div class="welcome__links"><a href="#limits">Privacy Policy</a><a href="#limits">Terms &amp; Conditions</a></div>
+          <div style="text-align:center;margin-top:14px"><button type="button" class="btn btn--orange"><span>Accept</span></button></div>
+        </div>
+      </div>
+    </div>
+    <p>The division badge is a silver shield <code>#EDEDED → #595959</code> with a grey ribbon and a bright-green bar beneath.
+      The web dialog is copied from computed styles: 45% black, 15px radius, inner rims in <code>rgba(47,109,146,.9)</code>,
+      Saira 300 body, <code>#5AC8FA</code> links and one orange commit. <span class="tag tag--v">Verified</span></p>
+
+    <div class="note note--ice"><p><strong>Advice inverts to ice.</strong> OSM's transient explanations (the help discs, the
+      in-card actions) live in the light sky and ice ramps. Persistent surfaces stay navy. A tooltip in OSMWiz is an ice
+      panel with <code>#1E3459</code> ink.</p></div>
+  </div>
+</section>
+
+<!-- ============ CHALK ============ -->
+<section id="chalk">
+  <div class="sec-head"><div class="wrap sec-head__in"><h2>Chalk</h2><p>The WIZ half, and the only thing here not measured from the game</p></div></div>
+  <div class="wrap sec-body">
+    <p class="lede">Everything above exists so the companion can show the game's data faithfully. Chalk exists so that
+      when <em>we</em> explain something, such as why a counter works or what a formation leaves open, it is obvious who is
+      talking.</p>
+
+    <h3>The board</h3>
+    <div class="grounds" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+      <div style="background:#0D1410"><code>#0D1410</code><span style="color:#5d6f63">Board ground</span></div>
+      <div style="background:#2C3A30"><code>#2C3A30</code><span style="color:#8fa396">Board rim · 2 units</span></div>
+      <div style="background:#E8F3EA"><code style="color:#0D1410">#E8F3EA</code><span style="color:#5a6b5f">Chalk, primary</span></div>
+      <div style="background:#9BB0A2"><code style="color:#0D1410">#9BB0A2</code><span style="color:#3c4a41">Chalk, secondary</span></div>
+      <div style="background:#FC8C21"><code style="color:#0D1410">#FC8C21</code><span style="color:#4a2a08">The orange pen · reused</span></div>
+    </div>
+    <p style="margin-top:16px">A green-black slate on a navy page. It is the only green-tinted dark in the system, so a board can
+      never be mistaken for the game's chrome. 2 units of rim and a 6-unit radius on a 100-unit width. No gloss, no marble,
+      no metal, no hairline. A board is a <strong>figure, not a panel</strong>: it holds a drawing, and body copy goes outside it.</p>
+
+    <div class="note"><p><strong>Why the board is not a pitch.</strong> OSM draws its own tactics on glossy 3D pitches with red tube
+      arrows (Game plan) and on flat bright-green fields with blue arrows (Line tactics). Our diagrams must never look like
+      those. A matte slate with chalk strokes cannot be confused with either.</p></div>
+
+    <h3>The stroke</h3>
+    <div class="tblwrap"><table class="tbl">
+      <thead><tr><th>Property</th><th>Value</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Width</td><td><code>5.5</code> per 100 units</td><td>Scales with the board, never a fixed px</td></tr>
+        <tr><td>Caps / joins</td><td><code>round</code></td><td>The game's chrome is machined and glossy; round chalk is the tell</td></tr>
+        <tr><td>Dash</td><td><code>12 7</code></td><td>A run or a pass still to come</td></tr>
+        <tr><td>Solid</td><td>no dash</td><td>A pass already played</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>The vocabulary: five marks and no more</h3>
+    <p>Real coaching notation, so anyone who has stood at a whiteboard can read it. A sixth mark has to be added here first.</p>
+    <div class="vocab">
+      <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><circle cx="50" cy="35" r="15" fill="none" stroke="#E8F3EA" stroke-width="5.5"/></svg></div><figcaption>O<b>One of ours</b></figcaption></figure>
+      <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M37 22 L63 48 M63 22 L37 48" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/></svg></div><figcaption>X<b>One of theirs</b></figcaption></figure>
+      <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M16 35 L84 35" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="12 7"/></svg></div><figcaption>Dashed<b>Still to come</b></figcaption></figure>
+      <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M16 35 L84 35" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/></svg></div><figcaption>Solid<b>Already played</b></figcaption></figure>
+      <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M16 35 L62 35" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="12 7"/><polygon points="86,35 62,25 62,45" fill="#FC8C21"/></svg></div><figcaption>Arrowhead<b>Where it ends</b></figcaption></figure>
+    </div>
+    <div class="note"><p>The arrowhead is the <strong>only</strong> orange on a board, and there is never more than one per figure.
+      It is the conclusion. Two arrowheads mean the figure is saying two things and should be two figures.</p></div>
+
+    <h3>Component · chalk figure</h3>
+    <figure class="chalkfig">
+      <div class="board"><svg viewBox="0 0 100 62" aria-hidden="true">
+        <circle cx="14" cy="44" r="6" fill="#0D1410" stroke="#E8F3EA" stroke-width="4"/>
+        <path d="M14 44 L40 30" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
+        <circle cx="44" cy="28" r="5" fill="#0D1410" stroke="#E8F3EA" stroke-width="3.5"/>
+        <path d="M48 28 L64 40 L80 24" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="12 7"/>
+        <path d="M52 44 L62 54 M62 44 L52 54" fill="none" stroke="#9BB0A2" stroke-width="4.5" stroke-linecap="round"/>
+        <polygon points="90,15 79,32 72,20" fill="#FC8C21"/>
+      </svg></div>
+      <figcaption>Why Counter attack beats a high line. The ball is won and played into midfield (solid), then the run goes
+        past the last defender (dashed). Orange marks where it ends. One arrowhead, one conclusion.</figcaption>
+    </figure>
+
+    <h3>Component · chalk empty state</h3>
+    <div class="emptydemo">
+      <div class="board"><svg viewBox="0 0 100 62" aria-hidden="true">
+        <circle cx="22" cy="44" r="6" fill="#0D1410" stroke="#E8F3EA" stroke-width="4"/>
+        <path d="M22 44 L44 44 L58 22 L76 40" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="12 7"/>
+        <polygon points="85,47 73,34 67,47" fill="#FC8C21"/>
+      </svg></div>
+      <h4>No squad yet</h4>
+      <p>Pick a club in the Club Picker, or add players by hand. We'll work out your strength badge and the line that needs work first.</p>
+    </div>
+    <div class="note"><p><strong>Not</strong> the one-line message inside a working panel. "No players match these filters" is a
+      sentence, not a scene, so it stays plain <code>#899AA7</code> text. A whole screen with nothing in it earns a board; a
+      line in the corner of a working panel does not.</p></div>
+
+    <h3>What chalk refuses</h3>
+    <div class="nope">
+      <div><b>Never on a card</b><span>Cards, frames, numerals and rating circles are the game's objects.</span></div>
+      <div><b>Never a number the game owns</b><span>No OVR, no price, no strength badge on a board. Chalk explains; navy reports.</span></div>
+      <div><b>Never chrome</b><span>No chalk top bar, buttons, headers or tabs.</span></div>
+      <div><b>Never a pitch</b><span>No grass, no 3D, no stadium. A board is slate.</span></div>
+      <div><b>One board per screen</b><span>A second competes with the first and neither reads.</span></div>
+    </div>
+
+    <h3>Construction</h3>
+    <p>Inline SVG on a viewBox 100 units wide, height set by the figure. No image files, no icon font, no drawing library.
+      That keeps a board crisp from a 16px favicon to a full-width diagram, and lets a share card for Discord or WhatsApp be
+      rendered from the same source.</p>
+  </div>
+</section>
+
+<!-- ============ RULES ============ -->
+<section id="rules">
+  <div class="sec-head"><div class="wrap sec-head__in"><h2>Rules</h2><p>Seven decisions that settle most questions</p></div></div>
+  <div class="wrap sec-body">
+    <div class="rules">
+      <div class="rule"><h4>Navy, never black</h4><p>Every dark surface carries hue 205–215°. A neutral black anywhere outside a
+        chalk board is a bug: it is the single fastest tell that a screen isn't OSM.</p></div>
+      <div class="rule"><h4>Light from the top</h4><p>Raised means a lighter top rim, a gloss band on the upper half and a dark
+        bevel beneath. Nothing is lit from below and nothing floats on a drop-shadow ladder.</p></div>
+      <div class="rule is-gold"><h4>Gold frames, never fills</h4><p>Gold is a hairline, a frame, a numeral or VS. It is never a
+        panel. The one exception is a gold card theme, which is the game's data, not our styling.</p></div>
+      <div class="rule is-green"><h4>Green means growth</h4><p>Neon greens fill what grows: training, fitness, division progress,
+        a won match. A green button means gain, and nothing else is green.</p></div>
+      <div class="rule is-yellow"><h4>Selection lights the label</h4><p>Selected darkens the fill and turns the label
+        <code>#FFE800</code>. Never a rim, never a glow, never a fill swap to another hue.</p></div>
+      <div class="rule"><h4>Data goes light</h4><p>Dense rows are white paper with a sky header and a cream highlight. Chrome
+        stays navy. Don't build a dark squad table: it is FHC's pattern, not OSM's.</p></div>
+      <div class="rule is-chalk"><h4>Navy reports, chalk explains</h4><p>A surface showing the game's numbers takes the measured
+        system. A surface carrying our reasoning takes the board. Never mix them on one object.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APPLY ============ -->
+<section id="apply">
+  <div class="sec-head"><div class="wrap sec-head__in"><h2>Apply</h2><p>Where each piece goes in OSMWiz</p></div></div>
+  <div class="wrap sec-body">
+    <div class="tblwrap"><table class="tbl">
+      <thead><tr><th>Surface</th><th>Built from</th></tr></thead>
+      <tbody>
+        <tr><td>Global</td><td>Navy ground <code>#0A1A2D</code>, royal backdrop with veins and floodlights behind hero panels, a top bar with the gold hairline, Saira Condensed plus the system grotesk.</td></tr>
+        <tr><td>Player pages</td><td>A line-up card as the page hero, with theme stored as data. A squad-table row for the stat line with the main stat bold. Rating history in sky and gold.</td></tr>
+        <tr><td>Club Picker</td><td>Next-match panel anatomy with rating circles per line (Kee / Def / Mid / Att / Team) and web-client tier rings.</td></tr>
+        <tr><td>Counter tactics</td><td>Tactic cards with a sky label and white value for the recommendation, and one chalk figure explaining why.</td></tr>
+        <tr><td>Training and camp calculators</td><td>Coach cards with neon progress. Results commit with an ice button; destructive resets are red.</td></tr>
+        <tr><td>Match logger</td><td>Timeline spine with minute bubbles and event pills. Win, draw and loss chips feed the tactic win-rate data.</td></tr>
+        <tr><td>Share cards (Discord, WhatsApp)</td><td>The next-match panel or a chalk figure, never both, with the OSMWiz lockup in the corner.</td></tr>
+        <tr><td>Primary actions</td><td>Orange for the one commit per screen, ice for in-card collect, sky as default, navy to dismiss.</td></tr>
+        <tr><td>Empty states</td><td>Full screen: chalk. Inside a panel: one line of muted text.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============ LIMITS ============ -->
+<section id="limits">
+  <div class="sec-head"><div class="wrap sec-head__in"><h2>Limits</h2><p>What we deliberately don't take</p></div></div>
+  <div class="wrap sec-body">
+    <p class="lede">OSMWiz is a companion tool, not a Gamebasics or Miniclip product. Mirroring the visual language is fair; taking
+      the identity is not. Gamebasics' Terms (A.7) reserve its names, logos and designs, and the companion follows them.</p>
+    <ul class="clean no">
+      <li><b>Never the logo.</b> No OSM wordmark, no white-outlined orange letterforms, no gold "26/27" numerals, no "25 Years" ribbon.</li>
+      <li><b>The acronym only inside our wordmark.</b> OSM appears as the first half of OSMWiz and nowhere else. "Online Soccer Manager" is written out only to name the game in prose.</li>
+      <li><b>No official framing.</b> No copy implying endorsement, partnership or affiliation with Gamebasics or Miniclip.</li>
+      <li><b>No photography and no crests.</b> Player photos and club crests are licensed. Cards take a silhouette; crests take an empty disc.</li>
+      <li><b>No characters.</b> The manager, commentator and coach mascots are the game's IP.</li>
+      <li><b>No lifted art.</b> Marble, baroque gold flourishes, the hexagon mesh and stadium photos are approximated in CSS, never extracted. No assets from the app package. Decompiling it breaches Terms A.7.</li>
+      <li><b>No currency icons.</b> The Boss Coin shield and the cash coin are drawn generically as "BC" and "$".</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ EVIDENCE ============ -->
+<section id="evidence">
+  <div class="sec-head"><div class="wrap sec-head__in"><h2>Evidence</h2><p>Every source, and how it was read</p></div></div>
+  <div class="wrap sec-body">
+    <div class="tblwrap"><table class="tbl">
+      <thead><tr><th>Source</th><th>Images</th><th>What it covers</th></tr></thead>
+      <tbody>
+        <tr><td>App Store, 26/27 art</td><td><code>14</code></td><td>OSM-300/324 at 2796×1290 and 2732×2048: Cards, Line-up, Ultimate team, Upgrade, Strategy, Match Exp, Rise. Identical across 17 storefronts.</td></tr>
+        <tr><td>App Store, previous art</td><td><code>8</code></td><td>OSM-170/191 at 2688×1242, still served in AR, ES and MX. Used only to date the 26/27 changes.</td></tr>
+        <tr><td>Google Play</td><td><code>17</code></td><td>14 phone and tablet screens, the 26/27 icon, the Arabic "المدرب الأفضل" icon, and the Halloween 2026 "Scary Switchers" feature graphic.</td></tr>
+        <tr><td>Web client</td><td><code>2</code></td><td>The privacy gate at 1440 px and 412 px, plus computed styles and <code>osm-style.css.v32583</code>: fonts, buttons, selection, dialog.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Method: 110 regions sampled at native resolution, each reduced to its median and its median-cut clusters. Glyph colours use the
+      95th-percentile luminance core, so anti-aliasing doesn't dull them. Web values are the browser's computed styles, read without
+      signing in or accepting the Terms. Store art is composited marketing, so a value seen only there is tagged Measured, and one
+      confirmed by the web client is tagged Verified.</p>
+    <p>Not covered: in-game screens that appear in no store art (transfer list, finances, stadium, scout, crews). Screenshots from a real
+      device would extend the measurement to those screens using the same method.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0;max-width:78ch">Measured from 41 official images and the live web client by region sampling and median-cut
+      clustering. Values are the game's, as rendered. <b>Online Soccer Manager</b> is a product of Gamebasics B.V., a Miniclip
+      company. OSMWiz is a third-party companion and claims no association with it. The Identity and Chalk sections exist so the
+      half of this system that is ours is never mistaken for the half that is theirs.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var links = Array.prototype.slice.call(document.querySelectorAll('.topbar nav a'));
+  var sections = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  function mark() {
+    var best = 0;
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i] && sections[i].getBoundingClientRect().top <= 120) best = i;
+    }
+    links.forEach(function (a, i) { a.classList.toggle('is-active', i === best); });
+  }
+  var ticking = false;
+  addEventListener('scroll', function () {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function () { mark(); ticking = false; });
+  }, { passive: true });
+  mark();
+})();
+</script>
+
+</body>
+</html>

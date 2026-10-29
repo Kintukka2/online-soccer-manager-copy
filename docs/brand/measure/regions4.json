@@ -1,0 +1,244 @@
+[
+ {
+  "id": "lineup_frame_bottom",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   340,
+   214,
+   470,
+   219
+  ],
+  "k": 4
+ },
+ {
+  "id": "lineup_frame_right",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   512,
+   140,
+   517,
+   200
+  ],
+  "k": 4
+ },
+ {
+  "id": "lineup_marble_corner",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   300,
+   128,
+   318,
+   146
+  ],
+  "k": 4
+ },
+ {
+  "id": "lineup_streak",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   430,
+   135,
+   470,
+   150
+  ],
+  "k": 4
+ },
+ {
+  "id": "lineup_pos_text",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   478,
+   165,
+   500,
+   180
+  ],
+  "k": 3
+ },
+ {
+  "id": "vs_head_top",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   900,
+   85,
+   1000,
+   100
+  ],
+  "k": 2
+ },
+ {
+  "id": "vs_head_bottom",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   900,
+   225,
+   1000,
+   240
+  ],
+  "k": 2
+ },
+ {
+  "id": "vs_panel_rim",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   78,
+   150,
+   81,
+   230
+  ],
+  "k": 3
+ },
+ {
+  "id": "tactic_card_rim",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   200,
+   312,
+   500,
+   316
+  ],
+  "k": 3
+ },
+ {
+  "id": "value_white",
+  "f": "ios/OSM-300_Strategy_2796x1290px_en-GB.png",
+  "box": [
+   292,
+   377,
+   486,
+   402
+  ],
+  "k": 3
+ },
+ {
+  "id": "coach_title",
+  "f": "ios/OSM-300_Upgrade_2796x1290px_en-GB.png",
+  "box": [
+   370,
+   178,
+   500,
+   196
+  ],
+  "k": 3
+ },
+ {
+  "id": "coach_name_gold",
+  "f": "ios/OSM-300_Upgrade_2796x1290px_en-GB.png",
+  "box": [
+   390,
+   263,
+   478,
+   288
+  ],
+  "k": 3
+ },
+ {
+  "id": "coach_card_top",
+  "f": "ios/OSM-300_Upgrade_2796x1290px_en-GB.png",
+  "box": [
+   320,
+   165,
+   550,
+   175
+  ],
+  "k": 2
+ },
+ {
+  "id": "coach_card_bottom",
+  "f": "ios/OSM-300_Upgrade_2796x1290px_en-GB.png",
+  "box": [
+   320,
+   575,
+   550,
+   585
+  ],
+  "k": 2
+ },
+ {
+  "id": "claim_btn_top",
+  "f": "ios/OSM-300_Upgrade_2796x1290px_en-GB.png",
+  "box": [
+   340,
+   514,
+   535,
+   522
+  ],
+  "k": 2
+ },
+ {
+  "id": "claim_btn_bottom",
+  "f": "ios/OSM-300_Upgrade_2796x1290px_en-GB.png",
+  "box": [
+   340,
+   553,
+   535,
+   560
+  ],
+  "k": 2
+ },
+ {
+  "id": "pill_coin_silver",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   205,
+   15,
+   235,
+   48
+  ],
+  "k": 4
+ },
+ {
+  "id": "bosscoin_icon",
+  "f": "ios/OSM-300_Line_up_2796x1290px_en-GB.png",
+  "box": [
+   346,
+   12,
+   384,
+   50
+  ],
+  "k": 4
+ },
+ {
+  "id": "star_badge",
+  "f": "ios/OSM-300_Ultimate_team_2796x1290px_en-GB.png",
+  "box": [
+   211,
+   338,
+   228,
+   358
+  ],
+  "k": 3
+ },
+ {
+  "id": "jersey_blue",
+  "f": "ios/OSM-300_Ultimate_team_2796x1290px_en-GB.png",
+  "box": [
+   8,
+   338,
+   32,
+   358
+  ],
+  "k": 3
+ },
+ {
+  "id": "table_text_dim",
+  "f": "ios/OSM-300_Ultimate_team_2796x1290px_en-GB.png",
+  "box": [
+   248,
+   340,
+   270,
+   356
+  ],
+  "k": 2
+ },
+ {
+  "id": "table_text_bold",
+  "f": "ios/OSM-300_Ultimate_team_2796x1290px_en-GB.png",
+  "box": [
+   50,
+   340,
+   95,
+   356
+  ],
+  "k": 2
+ }
+]
