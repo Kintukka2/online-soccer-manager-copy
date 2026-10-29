@@ -13,3 +13,4 @@ A study and future re-implementation of **Online Soccer Manager (OSM)**, the fre
   - training, transfers, finances, staff and boosts
   - monetisation, live ops, social, fair play and reception
   - a domain-model blueprint for building a copy
+- [`docs/COMPANION-LANDSCAPE.md`](docs/COMPANION-LANDSCAPE.md) maps the companion apps, sites, bots and creators around OSM. It also covers the Terms of Service constraints, a feature gap matrix and positioning for a fut.gg/futbin-style companion.
