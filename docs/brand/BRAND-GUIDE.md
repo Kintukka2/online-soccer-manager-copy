@@ -11,35 +11,37 @@ Snapshot: 29 October 2026, Online Soccer Manager 26/27.
 
 ## 1. The idea in one line
 
-**Navy is theirs. Chalk is ours.**
+**Navy is theirs. The scarf is ours.**
 
-OSMWiz shows Online Soccer Manager's data in the game's own measured visual language. Anything that is *our* analysis is drawn in chalk, so a reader always knows who is talking.
+OSMWiz shows Online Soccer Manager's data in the game's own measured visual language. Everything that is *ours* comes from the dressing room, so a reader always knows who is talking:
+- the brand is knitted into a scarf;
+- our analysis goes on a magnet tactics board;
+- our accent is training-bib pink.
 
 | Half | What it covers | Drawn in |
 |---|---|---|
 | **OSM**, the game's world | Cards, ratings, squads, fixtures, tactics settings, money, divisions | The measured system: navy, royal, sky, ice, gold, green, orange; Saira Condensed and the system grotesk |
-| **WIZ**, ours | The mark, counter-tactic reasoning, editorial diagrams, teaching, full-screen empty states | Chalk on slate, Anton for the wordmark only |
+| **WIZ**, ours | The brand, counter-tactic reasoning, editorial diagrams, teaching, full-screen empty states | The dressing room: the scarf, the magnet tactics board and bib pink `#FF3D7F`. Jersey 10 for the wordmark only |
 
-Rule: **their data wears navy and gold, our thinking wears chalk.** Never both on one object.
+Rule: **their data wears navy and gold; our thinking goes on the board.** Never both on one object.
 
 ---
 
 ## 2. Name and wordmark
 
-- **OSMWiz** is the working name. It follows the `<game>WIZ` pattern of FHCWiz, so the two read as one family.
-- **The wordmark** is `OSMWIZ` in Anton, on one line:
-  - OSM in `#899AA7`, WIZ in `#FFFFFF`;
-  - a 5-unit orange (`#FC8C21`) rule under the full width.
-- **The mark** is a W drawn as a move on a chalk slate:
-  - O at the start;
-  - two passes played (solid);
-  - a run still to come (dashed);
-  - one orange arrowhead.
+- **OSMWiz** is the working name.
+- **The mark is the W of the WM.**
+  - Herbert Chapman's Arsenal (1925) played a shape named after two letters: the defence formed an M and the attack a W.
+  - The mark is that W in magnets on a white tactics board. Four navy magnets and one bib-pink playmaker are joined by marker passes.
+  - The wordmark completes the formation: the M of OSM sits against the W of WIZ.
+- **The wordmark** is `OSMWIZ` in **Jersey 10**, a pixel face drawn from knitting charts. It has two forms:
+  - **knitted** into the cream centre of a bar scarf, ink on cream between bib-pink bars, with fringe at both ends;
+  - **flat**: OSM in `#899AA7`, WIZ in `#FFFFFF`, over a knitted pink rule.
 - Never:
   - set OSM alone;
   - set the wordmark in one flat colour;
-  - reuse the orange rule as a divider;
-  - set the wordmark in Saira Condensed, which is the game's face.
+  - set the wordmark in Saira Condensed, which is the game's face;
+  - use the game's orange in our identity. Ours is bib pink, which the game never renders.
 - **Naming risk:** "OSM" is the universal shorthand for OpenStreetMap, and most "OSM" store results are map apps. Every store listing, page title and social bio carries "Online Soccer Manager" in full beside OSMWiz.
 
 Disclaimer line, used verbatim in footers and store listings:
@@ -100,7 +102,7 @@ OSMWiz talks like a sharp assistant manager: numbers first, plain English, no hy
 - **Labels pair with values:** a small sky label above a large white value (`Tackling` / `Normal`). Don't merge them into one sentence.
 - **Errors** say what happened and what to do: "We couldn't read that screenshot. Crop it to the squad table and try again."
 - **Empty states:**
-  - Full screen: a chalk board plus a heading and one sentence.
+  - Full screen: a tactics board, with magnets parked along the touchline, plus a heading and one sentence.
   - Inside a working panel: one muted line (`#899AA7`).
 
 ---
@@ -118,7 +120,7 @@ The full ramps are in the visual system and `tokens.css`. Each ramp has one job:
 | **Ring** | Rating circles | `#0A3E55` disc, `#49B9C6` ring |
 | **Gold** | Prestige: frames, hairline, numerals, VS | `#A2855F` `#DFC091` `#E4C197` `#F2E6CA` |
 | **Green** | Growth: training, fitness, division, wins | `#19560F` `#16B800` `#50F12E` `#00FA33` |
-| **Orange** | Commit, and the pen in chalk | `#FC8C21` (hover `#EC781E`) |
+| **Orange** | Commit (theirs: never in our identity) | `#FC8C21` (hover `#EC781E`) |
 
 Singles:
 
@@ -133,6 +135,18 @@ Singles:
 | Disabled | `#B3B3B3` | Disabled controls |
 | Paper | `#FFFFFF`, star row `#FFF8E5` | Squad table |
 
+Ours, the dressing room (designed, not measured):
+
+| Name | Value | Use |
+|---|---|---|
+| Bib pink | `#FF3D7F` (deep `#C21F5B`) | Our accent: our magnets, the arrowhead, the scarf bars, the wordmark rule |
+| Scarf cream | `#F3EBDD` | Scarf centre |
+| Marker ink | `#1C2733` | Marker strokes, scarf pinstripes |
+| Board | `#F4F6F3` | Board surface |
+| Printed lines | `#C5D0C9` | Board markings |
+| Aluminium | `#9AA4AD` | Board frame |
+| Their magnet | `#13233A` | Opposition |
+
 Strength tiers, from the game's own code: **blue < 80, bronze 80+, silver 90+, gold 100+**.
 
 Card colour is a **theme**, stored per card. It is never computed from rating.
@@ -146,7 +160,7 @@ Card colour is a **theme**, stored per card. It is never computed from rating.
 | Display, names, numbers, buttons | **Saira Condensed 800**, caps | The game's own face. Google Fonts, OFL |
 | Labels, values, tables | **System grotesk** (Helvetica Neue / SF / Roboto) | Labels 400, values 700 |
 | Web body | Saira Condensed 300 at 18px | The web client's computed body style |
-| Wordmark only | **Anton** | Ours. Never used for anything else |
+| Wordmark only | **Jersey 10** | Ours: a knit-chart pixel face. Google Fonts, OFL. Never used for anything else |
 
 VS and GOAL wordart (italic 800, metallic fill) belong to match-day components only.
 
@@ -186,26 +200,37 @@ These are all live in the visual system:
 - match timeline;
 - division shield;
 - web dialog;
-- chalk figure;
-- chalk empty state.
+- the scarf and the scarf band;
+- the board figure;
+- the board empty state.
 
 ---
 
-## 10. Chalk (summary)
+## 10. The dressing room (summary)
 
-- **Board and stroke:**
-  - Slate `#0D1410` with a `#2C3A30` rim.
-  - Chalk `#E8F3EA` and `#9BB0A2`.
-  - Pen `#FC8C21`.
-  - Stroke 5.5 per 100 units, round caps and joins, dash `12 7`.
+- **The scarf:**
+  - A bar scarf, held up: bib-pink bars, ink pinstripes, a cream centre with the wordmark knitted in, and fringe at both ends.
+  - One 8×6 SVG stitch tiles over the whole scarf.
+  - The **scarf band** is the same stripes cut to 18px. It edges our editorial headers and share cards.
+  - It never sits behind game data.
+- **The board:**
+  - A white melamine tactics board in an aluminium frame, with pitch markings printed in light grey.
+  - Marker width 3.5 per 100 units, with round caps and joins and dash `9 6`.
+  - Magnets have `r 4.6`, a white rim and a 0.9-unit shadow. That shadow is the only one in our half.
 - **Five marks:**
-  - O: one of ours.
-  - X: one of theirs.
+  - Our magnet (bib pink): one of ours.
+  - Their magnet (navy): one of theirs.
   - Dashed: still to come.
   - Solid: already played.
-  - Arrowhead: where it ends. Exactly one per figure, and the only orange on the board.
-- **Refusals:** never on a card, never a game-owned number, never chrome, never a pitch, one board per screen.
-- **Distinctness:** the board must never resemble the game's own diagrams, which are glossy 3D pitches with red tube arrows, or flat green fields with blue arrows.
+  - Arrowhead (bib pink): where it ends. Exactly one per board.
+- **Refusals:**
+  - never on a card;
+  - never a game-owned number (a magnet carries a position code at most);
+  - never chrome;
+  - never grass;
+  - one board per screen;
+  - never the game's orange.
+- **Distinctness:** the board must never resemble the game's own diagrams, which are glossy 3D pitches with red tube arrows, or flat green fields with blue arrows. A white board with printed lines cannot.
 
 ---
 
@@ -217,7 +242,7 @@ These are all live in the visual system:
 4. **Green means growth.**
 5. **Selection lights the label** (`#FFE800`), never a rim.
 6. **Data goes light.**
-7. **Navy reports, chalk explains.**
+7. **Navy reports, the board explains.**
 
 ---
 
