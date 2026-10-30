@@ -113,15 +113,23 @@ async function harness(browser) {
 /* ---------- 2. the app at both widths ---------- */
 
 // The outermost elements that run past the right edge, so a failure names
-// something to look at rather than only a width.
+// something to look at rather than only a width. Anything inside a box that
+// clips or scrolls sideways (the tab rail does) cannot widen the page, so it
+// is not named.
 function overflow() {
   const vw = window.innerWidth;
   const out = [];
+  const contained = (e) => {
+    for (let p = e.parentElement; p && p !== document.body; p = p.parentElement) {
+      if (getComputedStyle(p).overflowX !== 'visible') return true;
+    }
+    return false;
+  };
   document.querySelectorAll('body *').forEach((e) => {
     if (out.length >= 3) return;
     const r = e.getBoundingClientRect();
     const parent = e.parentElement && e.parentElement.getBoundingClientRect();
-    if (r.width && r.right > vw + 1 && (!parent || parent.right <= vw + 1)) {
+    if (r.width && r.right > vw + 1 && (!parent || parent.right <= vw + 1) && !contained(e)) {
       out.push(e.tagName.toLowerCase() + (e.id ? '#' + e.id : '') +
         (typeof e.className === 'string' && e.className.trim()
           ? '.' + e.className.trim().split(/\s+/).join('.') : '') +
