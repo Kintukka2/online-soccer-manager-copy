@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OSMWiz: Squad Strength, Tactics and Calculators for Online Soccer Manager</title>
+<meta name="description" content="Free tools for Online Soccer Manager. Work out your squad's strength badge the way the game does, find the formation that suits your squad, cost a Training Camp and keep a record of what wins. A fan project, not affiliated with Gamebasics.">
+<meta name="theme-color" content="#011D30">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- iOS reads its own tags for an installed copy, not the manifest. -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="OSMWiz">
+<meta property="og:site_name" content="OSMWiz">
+<meta property="og:title" content="OSMWiz: tools for Online Soccer Manager">
+<meta property="og:description" content="Squad strength, tactics, calculators and a match log for Online Soccer Manager. Built by players.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://osmwiz.com/og.png?v=0.1.0">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Saira+Condensed:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/styles.css?v=0.1.0">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar__in">
+    <a class="brand" href="#/" aria-label="OSMWiz home"><i>OSM</i>WIZ</a>
+    <nav aria-label="Sections">
+      <a href="#/squad" data-route="squad">Squad</a>
+      <a href="#/tactics" data-route="tactics">Tactics</a>
+      <a href="#/calculators" data-route="calculators">Calculators</a>
+      <a href="#/log" data-route="log">Match log</a>
+      <a href="#/about" data-route="about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="view" tabindex="-1"></main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div class="band" aria-hidden="true"></div>
+    <p>OSMWiz is an independent companion for Online Soccer Manager. It is not made, endorsed or reviewed by Gamebasics B.V. or Miniclip.</p>
+    <p>Your squad and match log stay on this device.</p>
+  </div>
+</footer>
+
+<script src="js/data.js?v=0.1.0"></script>
+<script src="js/engine.js?v=0.1.0"></script>
+<script src="js/board.js?v=0.1.0"></script>
+<script src="js/store.js?v=0.1.0"></script>
+<script src="js/ui.js?v=0.1.0"></script>
+<script src="js/app.js?v=0.1.0"></script>
+</body>
+</html>

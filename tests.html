@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OSMWiz tests</title>
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  body { padding: 24px; }
+  .t { padding: 6px 10px; border-left: 3px solid; margin-bottom: 4px; font-size: 13px; border-radius: 0 6px 6px 0; }
+  .t.pass { border-color: var(--gr-bar); background: rgba(80,241,46,.07); }
+  .t.fail { border-color: var(--red); background: rgba(217,83,79,.12); }
+  .t .msg { color: #ffc9c9; font-size: 12px; margin-top: 3px; font-family: ui-monospace, Consolas, monospace; }
+  #summary { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
+</style>
+</head>
+<body>
+  <h1>OSMWiz tests</h1>
+  <div id="summary"></div>
+  <div id="out"></div>
+
+<!-- The modules with no DOM at load time. app.js is left out on purpose: it
+     binds to the app shell, which this page does not have. store.js is
+     loaded for its migration, which the suite calls directly. -->
+<script src="js/harness.test.js"></script>
+<script src="js/data.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/board.js"></script>
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/engine.test.js"></script>
+<script src="js/ui.test.js"></script>
+<script>
+  var results = OSM.runTests();
+  var passed = results.filter(function (r) { return r.pass; }).length;
+  var summary = document.getElementById('summary');
+  summary.textContent = passed + ' / ' + results.length + ' passing';
+  summary.style.color = passed === results.length ? 'var(--gr-bar)' : 'var(--red)';
+  document.getElementById('out').innerHTML = results.map(function (r) {
+    return '<div class="t ' + (r.pass ? 'pass' : 'fail') + '">' +
+      (r.pass ? '&#10003; ' : '&#10007; ') + r.name +
+      (r.pass ? '' : '<div class="msg">' + r.message + '</div>') + '</div>';
+  }).join('');
+</script>
+</body>
+</html>

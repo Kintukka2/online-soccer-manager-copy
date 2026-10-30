@@ -1,0 +1,19 @@
+# Personal, machine-specific Claude Code permissions (contains local absolute paths)
+.claude/settings.local.json
+
+# OS / OneDrive cruft
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Generated preview bundle, should one ever be built
+/dist/
+
+# Verification tooling (Playwright) is installed ad hoc; the app itself is
+# zero-build with no runtime dependencies, so none of this belongs in the repo.
+node_modules/
+package.json
+package-lock.json
+
+# Built site (tools/build-site.js): what Cloudflare Pages publishes.
+/public/

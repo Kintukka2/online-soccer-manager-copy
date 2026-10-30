@@ -1,0 +1,11 @@
+# osmwiz.com (a working name until the domain is bought)
+User-agent: *
+Allow: /
+
+# No Sitemap line yet: there is no sitemap.xml, and a Sitemap line pointing at
+# a 404 is worse than none. Add "Sitemap: https://<domain>/sitemap.xml" when
+# one is published (and list it in SITE in tools/build-site.js).
+#
+# Never list a private path here to hide it: this file is public too, so it
+# would be a map to exactly what should not be found. Private files are kept
+# off the site by tools/build-site.js, which never publishes them.

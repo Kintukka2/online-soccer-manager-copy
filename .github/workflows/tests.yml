@@ -1,0 +1,50 @@
+name: tests
+
+# Pushes to the default branch, and pull requests. Not every branch: a push to
+# a branch that has a PR open fires both triggers and runs the whole suite
+# twice on the same commit.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Installed ad hoc rather than from a manifest: .gitignore keeps
+      # package.json out of this repo on purpose, because the app itself is
+      # zero-build with no runtime dependencies and only the test harness
+      # needs a browser. --no-save so nothing tries to write one.
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.49.1
+          npx playwright install --with-deps chromium
+
+      # tests.html headless, then every route of the app at 1280 and 390
+      # wide: no page error, no console error, nothing wider than the screen.
+      - name: Unit tests and the app at both widths
+        run: node tools/run-tests.js
+
+      # The copy on the pages and in js/, read as text. docs/voice.md is the
+      # rule; this only catches the faults with a mechanical signature.
+      - name: Copy reads for the reader
+        run: node tools/voice-check.js
+
+      # A stale stamp means a fix would reach new visitors and not returning
+      # ones, which is close to undiagnosable in the wild. Cheap to catch here.
+      # The same run checks the service worker's precache list.
+      - name: Asset URLs carry the current version
+        run: node tools/stamp-assets.js --check
+
+      # The same build Cloudflare Pages runs. It refuses a top-level file or
+      # folder that is not marked as site or private, and fails if any page
+      # links to something that was not published.
+      - name: Site builds with only its own files
+        run: node tools/build-site.js
