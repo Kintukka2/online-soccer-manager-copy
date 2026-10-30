@@ -61,12 +61,11 @@ written for maintainers and are exempt.
 
 ## House style
 
-- **One clause.** Subject, verb, object. Every cut clause in FHCWiz's rewrites
-  was a defence, an aside or a boast.
-- **No em-dash asides in UI copy** (*checked*). Make it two sentences or cut
-  the aside. A dash as a title separator, or alone for an empty value, is fine.
-- **No "actually"** doing defensive work against an unstated alternative.
-- **Standfirsts describe; they don't sell.** Buttons are verbs the manager would say.
+- **One clause.** Subject, verb, object. A second clause is usually a defence.
+- **No em-dash asides in UI copy** (*checked*). Make it two sentences or cut the
+  aside; a dash as a title separator, or alone for an empty value, is fine.
+- **No "actually"** doing defensive work. Standfirsts describe; they don't sell.
+- **Buttons are verbs** the manager would say.
 - **British football English**, as the game writes it (brand §3). A player's or
   club's name keeps its own spelling.
 
@@ -78,5 +77,4 @@ literals in `js/`, skipping tests, comments and console output, and prints
 the reader. If a word genuinely belongs, add it to `ALLOWED` in the tool with a
 reason; an allowed phrase is matched against one sentence, never a whole page,
 or one exception would hide every other fault beside it. §5 and most of §3 and
-§4 have no mechanical signature and still need reading. Prove a new rule by
-putting the bad sentence back: a check that has never failed proves nothing.
+§4 still need reading. Prove a new rule by putting the bad sentence back.
