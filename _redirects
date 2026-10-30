@@ -1,0 +1,11 @@
+# Cloudflare Pages redirects. https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# No rules yet: nothing has moved. When a page or tab does move, add a line
+# here rather than letting the old address 404:
+#
+#   /old-path   /new-path/   301
+#
+# 301 so search engines carry what the old address had earned across to the
+# new one, and so a link shared before the move still lands. A #/ fragment on
+# an old link survives the redirect, and the app routes on it as before.
+# tools/build-site.js treats every source path here as a link that resolves.
